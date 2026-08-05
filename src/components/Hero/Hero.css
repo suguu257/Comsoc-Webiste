@@ -1,0 +1,93 @@
+/* =======================================
+HERO
+======================================= */
+
+.hero{
+
+position:absolute;
+
+inset:0;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:5;
+
+pointer-events:none;
+
+}
+
+/* =======================================
+CENTER
+======================================= */
+
+.heroCenter{
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:2px;
+
+}
+
+.heroCenter h1{
+
+font-family:"Tiny5",monospace;
+
+font-size:70px;
+
+letter-spacing:4px;
+
+font-weight:400;
+
+color:white;
+
+text-transform:uppercase;
+
+opacity:.92;
+
+
+text-shadow:
+0 0 10px rgba(255,255,255,.35),
+0 0 30px rgba(70,150,255,.18);
+
+}
+
+.heroCenter h2{
+
+font-family:"Tiny5",monospace;
+
+font-size:60px;
+
+letter-spacing:4px;
+
+font-weight:400;
+
+color:white;
+
+text-transform:uppercase;
+
+opacity:.92;
+
+}
+
+/* =======================================
+OUTER
+======================================= */
+
+.outerRing,
+.innerRing{
+
+position:absolute;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}

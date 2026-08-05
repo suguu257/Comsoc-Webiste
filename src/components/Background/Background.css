@@ -1,0 +1,888 @@
+/* =======================================================
+   IEEE COMSOC BACKGROUND
+======================================================= */
+
+.background{
+
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    background:#020306;
+    isolation:isolate;
+    transition:transform .25s ease-out;
+
+}
+
+/* =======================================================
+   NEBULA
+======================================================= */
+
+.nebula{
+
+    position:absolute;
+    border-radius:50%;
+    filter:blur(120px);
+    mix-blend-mode:screen;
+    pointer-events:none;
+    animation:nebulaMove 30s ease-in-out infinite alternate;
+
+}
+
+.nebula1{
+
+    width:850px;
+    height:850px;
+
+    left:-280px;
+    top:-180px;
+
+    background:
+
+    radial-gradient(circle,
+
+    rgba(0,90,255,.06),
+
+    transparent 72%);
+
+}
+
+.nebula2{
+
+    width:900px;
+    height:900px;
+
+    right:-250px;
+    top:-180px;
+
+    background:
+
+    radial-gradient(circle,
+
+    rgba(60,150,255,.04),
+
+    transparent 72%);
+
+    animation-delay:8s;
+
+}
+
+.nebula3{
+
+    width:900px;
+    height:900px;
+
+    left:50%;
+    bottom:-520px;
+
+    transform:translateX(-50%);
+
+    background:
+
+    radial-gradient(circle,
+
+    rgba(0,90,255,.05),
+
+    transparent 72%);
+
+    animation-delay:16s;
+
+}
+
+/* =======================================================
+CENTER GLOW
+======================================================= */
+
+.centerGlow{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:650px;
+    height:650px;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(circle,
+
+    rgba(50,130,255,.05),
+
+    rgba(0,70,255,.02),
+
+    transparent 72%);
+
+    filter:blur(70px);
+
+    animation:centerGlow 8s ease-in-out infinite;
+
+}
+
+/* =======================================================
+STARS
+======================================================= */
+
+.stars{
+
+    position:absolute;
+    inset:0;
+
+}
+
+/* ----------------------- */
+
+.star{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    animation-name:twinkle;
+
+    animation-iteration-count:infinite;
+
+    animation-timing-function:ease-in-out;
+
+}
+
+/* ----------------------- */
+
+.star.tiny{
+
+    width:.8px;
+    height:.8px;
+
+}
+
+/* ----------------------- */
+
+.star.medium{
+
+    width:1.8px;
+    height:1.8px;
+
+}
+
+/* ----------------------- */
+
+.star.bright{
+
+    width:3px;
+    height:3px;
+
+}
+
+/* ----------------------- */
+
+.star.white{
+
+background:#f5f8ff;
+
+box-shadow:
+
+0 0 2px rgba(255,255,255,.18),
+
+0 0 5px rgba(255,255,255,.10);
+
+}
+
+/* ----------------------- */
+
+.star.blue{
+
+background:#6bbdff;
+
+box-shadow:
+
+0 0 3px rgba(90,180,255,.35),
+
+0 0 8px rgba(90,180,255,.18);
+
+}
+/* =======================================================
+ONLY BRIGHT STARS GET CROSSES
+======================================================= */
+
+.star.bright::before,
+.star.bright::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    background:inherit;
+
+    opacity:.35;
+
+}
+
+/* Horizontal */
+
+.star.bright::before{
+
+    width:12px;
+    height:1px;
+
+}
+
+/* Vertical */
+
+.star.bright::after{
+
+    width:1px;
+    height:12px;
+
+}
+
+/* =======================================================
+ANIMATIONS
+======================================================= */
+
+@keyframes twinkle{
+
+    0%{
+
+        opacity:.15;
+        transform:scale(.5);
+
+    }
+
+    20%{
+
+        opacity:.6;
+        transform:scale(.9);
+
+    }
+
+    45%{
+
+        opacity:.25;
+        transform:scale(.7);
+
+    }
+
+    70%{
+
+        opacity:.85;
+        transform:scale(1.2);
+
+    }
+
+    100%{
+
+        opacity:.15;
+        transform:scale(.5);
+
+    }
+
+}
+
+/* ----------------------- */
+
+@keyframes nebulaMove{
+
+    from{
+
+        transform:
+
+        translate(0px,0px)
+
+        scale(1);
+
+    }
+
+    to{
+
+        transform:
+
+        translate(35px,-18px)
+
+        scale(1.05);
+
+    }
+
+}
+
+/* ----------------------- */
+
+@keyframes centerGlow{
+
+    0%{
+
+        opacity:.18;
+
+        transform:
+
+        translate(-50%,-50%)
+
+        scale(.95);
+
+    }
+
+    50%{
+
+        opacity:.35;
+
+        transform:
+
+        translate(-50%,-50%)
+
+        scale(1.05);
+
+    }
+
+    100%{
+
+        opacity:.18;
+
+        transform:
+
+        translate(-50%,-50%)
+
+        scale(.95);
+
+    }
+
+}
+
+/* =======================================================
+   FLOATING ORBS
+======================================================= */
+
+.orb{
+
+    position:absolute;
+
+    opacity:.35;
+
+    border-radius:var(--radius);
+
+    overflow:hidden;
+
+    will-change:transform,opacity;
+
+    backdrop-filter:blur(1px);
+
+}
+
+.orb::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:inherit;
+
+    background:
+
+    radial-gradient(
+
+        circle at 35% 35%,
+
+        rgba(255,255,255,.22),
+
+        rgba(255,255,255,.08),
+
+        transparent 75%
+
+    );
+
+}
+.orb.white{
+
+background:#f5f8ff;
+
+box-shadow:
+
+0 0 10px rgba(255,255,255,.12),
+
+0 0 28px rgba(255,255,255,.08);
+
+}
+
+.orb.blue{
+
+background:#3b82ff;
+
+box-shadow:
+
+0 0 14px rgba(59,130,255,.25),
+
+0 0 36px rgba(59,130,255,.12);
+
+}
+
+.blur1{
+
+filter:blur(6px);
+
+}
+
+.blur2{
+
+filter:blur(10px);
+
+}
+
+.blur3{
+
+filter:blur(16px);
+
+}
+
+.blur4{
+
+filter:blur(22px);
+
+}
+
+.motion-1{
+
+animation:orb1 26s ease-in-out infinite;
+
+}
+
+.motion-2{
+
+animation:orb2 30s ease-in-out infinite;
+
+}
+
+.motion-3{
+
+animation:orb3 22s ease-in-out infinite;
+
+}
+
+.motion-4{
+
+animation:orb4 32s ease-in-out infinite;
+
+}
+
+.motion-5{
+
+animation:orb5 28s ease-in-out infinite;
+
+}
+
+.motion-6{
+
+animation:orb6 34s ease-in-out infinite;
+
+}
+
+.motion-7{
+
+animation:orb7 24s ease-in-out infinite;
+
+}
+
+@keyframes orb1{
+
+0%,100%{
+
+transform:translate(0,0);
+
+}
+
+50%{
+
+transform:translate(18px,-14px);
+
+}
+
+}
+
+@keyframes orb2{
+
+0%,100%{
+
+transform:translate(0,0);
+
+}
+
+50%{
+
+transform:translate(-14px,18px);
+
+}
+
+}
+
+@keyframes orb3{
+
+0%,100%{
+
+transform:translate(0,0);
+
+}
+
+25%{
+
+transform:translate(-8px,-12px);
+
+}
+
+75%{
+
+transform:translate(10px,16px);
+
+}
+
+}
+
+@keyframes orb4{
+
+0%,100%{
+
+transform:translate(0,0);
+
+}
+
+50%{
+
+transform:translate(14px,10px);
+
+}
+
+}
+
+@keyframes orb5{
+
+0%,100%{
+
+transform:translate(0,0);
+
+}
+
+50%{
+
+transform:translate(-20px,6px);
+
+}
+
+}
+
+@keyframes orb6{
+
+0%,100%{
+
+transform:translate(0,0);
+
+}
+
+40%{
+
+transform:translate(-12px,-10px);
+
+}
+
+80%{
+
+transform:translate(12px,8px);
+
+}
+
+}
+
+@keyframes orb7{
+
+0%,100%{
+
+transform:translate(0,0);
+
+}
+
+50%{
+
+transform:translate(16px,12px);
+
+}
+
+}
+
+/* =======================================================
+DOT GRID
+======================================================= */
+
+.dotGrid{
+
+position:absolute;
+
+left:7%;
+
+top:10%;
+
+display:grid;
+
+grid-template-columns:repeat(8,10px);
+
+gap:10px;
+
+opacity:.45;
+
+animation:gridFloat 16s ease-in-out infinite;
+
+}
+
+.dotGrid span{
+
+width:5px;
+
+height:5px;
+
+border-radius:50%;
+
+background:#3b88ff;
+
+box-shadow:0 0 8px #3b88ff;
+
+}
+
+/* =======================================================
+COMMUNICATION BARS
+======================================================= */
+
+.bars{
+
+position:absolute;
+
+left:4%;
+
+bottom:13%;
+
+display:flex;
+
+align-items:flex-end;
+
+gap:8px;
+
+opacity:.8;
+
+}
+
+.bars span{
+
+width:6px;
+
+border-radius:6px;
+
+background:
+
+linear-gradient(
+
+180deg,
+
+#dff6ff,
+
+#69baff,
+
+#0058ff
+
+);
+
+box-shadow:
+
+0 0 12px rgba(50,120,255,.5);
+
+animation:bars 5s ease-in-out infinite;
+
+}
+
+.bars span:nth-child(1){
+
+height:95px;
+
+}
+
+.bars span:nth-child(2){
+
+height:58px;
+
+animation-delay:.2s;
+
+}
+
+.bars span:nth-child(3){
+
+height:120px;
+
+animation-delay:.6s;
+
+}
+
+.bars span:nth-child(4){
+
+height:74px;
+
+animation-delay:.8s;
+
+}
+
+.bars span:nth-child(5){
+
+height:46px;
+
+animation-delay:1.1s;
+
+}
+
+/* =======================================================
+CHECKER
+======================================================= */
+
+.checker{
+
+position:absolute;
+
+right:6%;
+
+bottom:18%;
+
+display:grid;
+
+grid-template-columns:repeat(5,16px);
+
+gap:4px;
+
+animation:gridFloat 18s ease-in-out infinite reverse;
+
+}
+
+.checker span{
+
+width:16px;
+
+height:16px;
+
+background:#d8d8d8;
+
+}
+
+.checker span:nth-child(even){
+
+background:#3f8cff;
+
+}
+
+/* =======================================================
+AMBIENT
+======================================================= */
+
+.background::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background-image:
+
+radial-gradient(circle,#6fb8ff 1px,transparent 1px);
+
+background-size:180px 180px;
+
+opacity:.04;
+
+animation:dustMove 40s linear infinite;
+
+pointer-events:none;
+
+}
+
+.background::after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+
+radial-gradient(circle,
+
+transparent,
+
+rgba(0,0,0,.15) 70%,
+
+rgba(0,0,0,.55));
+
+pointer-events:none;
+
+}
+
+@keyframes bars{
+
+50%{
+
+transform:translateY(-8px);
+
+}
+
+}
+
+@keyframes gridFloat{
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+}
+
+@keyframes dustMove{
+
+from{
+
+transform:translateX(0);
+
+}
+
+to{
+
+transform:translateX(-180px);
+
+}
+}
+
+.edgeFade{
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(
+
+ellipse at center,
+
+transparent 38%,
+
+rgba(0,0,0,.18) 75%,
+
+rgba(0,0,0,.65)
+
+);
+
+z-index:2;
+
+}
+

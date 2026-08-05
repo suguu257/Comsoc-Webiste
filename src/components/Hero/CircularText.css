@@ -1,0 +1,281 @@
+/* ==========================================================
+   CIRCULAR TEXT
+========================================================== */
+
+.circularText{
+
+    position:absolute;
+
+    inset:0;
+
+    animation-play-state:running;
+
+    pointer-events:none;
+
+    user-select:none;
+
+}
+
+/* ==========================================================
+   LETTERS
+========================================================== */
+
+.circularText span{
+
+    position:absolute;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transform-origin:center;
+
+    font-family:"Tiny5", monospace;
+font-size:18px;
+font-weight:400;
+
+    font-size:15px;
+
+    font-weight:400;
+
+    color:#F6FAFF;
+
+    white-space:pre;
+
+    letter-spacing:0;
+
+    line-height:1;
+
+    text-shadow:
+
+        0 0 4px rgba(255,255,255,.18),
+
+        0 0 12px rgba(70,160,255,.18);
+
+    transition:
+
+        color .4s ease,
+
+        text-shadow .4s ease;
+
+}
+
+/* ==========================================================
+   OUTER RING
+========================================================== */
+
+.outerRing{
+
+    position:absolute;
+
+    width:570px;
+
+    height:570px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+/* Thin ring */
+
+.outerRing::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:50%;
+
+    border:1px solid rgba(120,190,255,.16);
+
+}
+
+/* Glow */
+
+.outerRing::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-4px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(70,150,255,.08);
+
+    filter:blur(10px);
+
+}
+
+/* ==========================================================
+   INNER RING
+========================================================== */
+
+.innerRing{
+
+    position:absolute;
+
+    width:380px;
+
+    height:380px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.innerRing::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:50%;
+
+    border:1px solid rgba(120,190,255,.12);
+
+}
+
+.innerRing::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-4px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(70,150,255,.07);
+
+    filter:blur(8px);
+
+}
+
+/* ==========================================================
+   OUTER ROTATION
+========================================================== */
+
+.outerRing .circularText{
+
+animation:rotateOuter 60s linear infinite;
+
+}
+
+.innerRing .circularText{
+
+animation:rotateInner 48s linear infinite;
+
+}
+
+/* ==========================================================
+   INNER ROTATION
+========================================================== */
+
+/* ==========================================================
+   HOVER
+========================================================== */
+
+.hero:hover .outerRing .circularText{
+
+    animation-duration:24s;
+
+}
+
+.hero:hover .innerRing .circularText{
+
+    animation-duration:20s;
+
+}
+
+/* ==========================================================
+   ANIMATIONS
+========================================================== */
+
+@keyframes rotateOuter{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+@keyframes rotateInner{
+
+    from{
+
+        transform:rotate(360deg);
+
+    }
+
+    to{
+
+        transform:rotate(0deg);
+
+    }
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:900px){
+
+.outerRing{
+
+width:560px;
+
+height:560px;
+
+}
+
+.innerRing{
+
+width:390px;
+
+height:390px;
+
+}
+
+.circularText span{
+
+font-size:12px;
+
+}
+
+}
+
+.bullet{
+
+    color:#5EB8FF;
+
+    text-shadow:
+
+        0 0 8px rgba(94,184,255,.8),
+
+        0 0 18px rgba(94,184,255,.4);
+
+}
