@@ -2,17 +2,21 @@ import Background from "../components/Background/Background";
 import Hero from "../components/Hero/Hero";
 
 export default function Landing() {
-
     return (
-
         <section className="landing">
 
             <Background />
 
-            <Hero />
+            <main className="landing-content">
+
+                <Hero />
+
+                {/* About Us will go here */}
+
+                {/* Events will go here */}
+
+            </main>
 
         </section>
-
     );
-
 }

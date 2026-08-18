@@ -1,32 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html,
-body,
-#root{
-
-    width:100%;
-    height:100%;
-
+html {
+    width: 100%;
+    min-height: 100%;
 }
 
-body{
-
-    background:black;
-    overflow:hidden;
-
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: black;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
-.landing{
+#root {
+    width: 100%;
+    min-height: 100vh;
+}
 
-    position:relative;
-    width:100%;
-    height:100vh;
-    overflow:hidden;
-    background:black;
+.landing {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: black;
+}
 
+.landing-content {
+    position: relative;
+    z-index: 5;
 }
