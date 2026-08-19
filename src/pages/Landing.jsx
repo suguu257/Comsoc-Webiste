@@ -1,5 +1,6 @@
 import Background from "../components/Background/Background";
 import Hero from "../components/Hero/Hero";
+import Events from "../components/Events/Events";
 
 export default function Landing() {
     return (
@@ -13,7 +14,7 @@ export default function Landing() {
 
                 {/* About Us will go here */}
 
-                {/* Events will go here */}
+               <Events/>
 
             </main>
 
