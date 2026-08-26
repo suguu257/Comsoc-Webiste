@@ -24,9 +24,9 @@ export default function Background() {
         x < 65 &&
         y > 30 &&
         y < 70 &&
-        Math.random() < .55
+        Math.random() < 0.55
       ) {
-        x += Math.random() > .5 ? 18 : -18;
+        x += Math.random() > 0.5 ? 18 : -18;
       }
 
       data.push({
@@ -34,20 +34,18 @@ export default function Background() {
         id: i,
 
         x,
-
         y,
 
         type:
-
           i < 180
             ? "tiny"
             : i < 240
             ? "medium"
             : "bright",
 
-        blue: Math.random() < .08,
+        blue: Math.random() < 0.08,
 
-        opacity: Math.random() * .25 + .10,
+        opacity: Math.random() * 0.25 + 0.10,
 
         duration: Math.random() * 10 + 8,
 
@@ -61,6 +59,7 @@ export default function Background() {
 
   }, []);
 
+
   /* ==========================================
       FLOATING ORBS
   ========================================== */
@@ -68,70 +67,113 @@ export default function Background() {
   const orbs = useMemo(() => [
 
     {
-x:8,
-y:36,
-size:46,
-type:"white",
-motion:1,
-blurClass:"blur4",
-radius:"8px"
-},
-{
-x:22,
-y:12,
-size:28,
-type:"blue",
-motion:2,
-blurClass:"blur2",
-radius:"4px"
-},
-{
-x:58,
-y:22,
-size:42,
-type:"white",
-motion:3,
-blurClass:"blur3",
-radius:"10px"
-},
-{
-x:63,
-y:33,
-size:30,
-type:"blue",
-motion:4,
-blurClass:"blur1",
-radius:"6px"
-},
-{
-x:80,
-y:48,
-size:36,
-type:"white",
-motion:5,
-blurClass:"blur3",
-radius:"12px"
-},
-{
-x:68,
-y:78,
-size:34,
-type:"blue",
-motion:6,
-blurClass:"blur2",
-radius:"5px"
-},
-{
-x:91,
-y:14,
-size:48,
-type:"white",
-motion:7,
-blurClass:"blur4",
-radius:"9px"
-},
+      x: 8,
+      y: 36,
+      size: 46,
+      type: "white",
+      motion: 1,
+      blurClass: "blur4",
+      radius: "8px"
+    },
+
+    {
+      x: 22,
+      y: 12,
+      size: 28,
+      type: "blue",
+      motion: 2,
+      blurClass: "blur2",
+      radius: "4px"
+    },
+
+    {
+      x: 58,
+      y: 22,
+      size: 42,
+      type: "white",
+      motion: 3,
+      blurClass: "blur3",
+      radius: "10px"
+    },
+
+    {
+      x: 63,
+      y: 33,
+      size: 30,
+      type: "blue",
+      motion: 4,
+      blurClass: "blur1",
+      radius: "6px"
+    },
+
+    {
+      x: 80,
+      y: 48,
+      size: 36,
+      type: "white",
+      motion: 5,
+      blurClass: "blur3",
+      radius: "12px"
+    },
+
+    {
+      x: 68,
+      y: 78,
+      size: 34,
+      type: "blue",
+      motion: 6,
+      blurClass: "blur2",
+      radius: "5px"
+    },
+
+    {
+      x: 91,
+      y: 14,
+      size: 48,
+      type: "white",
+      motion: 7,
+      blurClass: "blur4",
+      radius: "9px"
+    }
 
   ], []);
+
+
+  /* ==========================================
+    METEORS
+========================================== */
+
+/* ==========================================
+    METEORS
+========================================== */
+
+const meteors = useMemo(() => {
+
+  return Array.from({ length: 5 }, (_, i) => ({
+
+    id: i,
+
+    // Spread them naturally across the upper/side areas
+    left: Math.random() * 120 - 10,
+
+    top: Math.random() * 70 - 15,
+
+    // Large gaps between appearances
+    delay: Math.random() * 35,
+
+    // Very slow movement: 14–22 seconds
+    duration: Math.random() * 8 + 14,
+
+    // Natural variation in trail size
+    length: Math.random() * 80 + 70,
+
+    // Subtle brightness
+    opacity: Math.random() * 0.25 + 0.30
+
+  }));
+
+}, []);
+
 
   /* ==========================================
       MOUSE PARALLAX
@@ -142,77 +184,132 @@ radius:"9px"
     const handleMove = (e) => {
 
       const x =
-        (e.clientX / window.innerWidth - .5) * 20;
+        (e.clientX / window.innerWidth - 0.5) * 20;
 
       const y =
-        (e.clientY / window.innerHeight - .5) * 20;
+        (e.clientY / window.innerHeight - 0.5) * 20;
 
       document
         .querySelectorAll(".nebula")
-        .forEach((layer,index)=>{
+        .forEach((layer, index) => {
 
-          const depth=(index+1)*0.4;
+          const depth = (index + 1) * 0.4;
 
-          layer.style.transform=
-          `translate(${x*depth}px,${y*depth}px)`;
+          layer.style.transform =
+            `translate(${x * depth}px, ${y * depth}px)`;
 
-      });
+        });
 
     };
 
-    window.addEventListener("mousemove",handleMove);
+    window.addEventListener("mousemove", handleMove);
 
-    return()=>window.removeEventListener("mousemove",handleMove);
+    return () =>
+      window.removeEventListener("mousemove", handleMove);
 
-  },[]);
+  }, []);
 
-  return(
 
-<div className="background" ref={backgroundRef}>
+  return (
 
-    {/* ===========================
+    <div
+      className="background"
+      ref={backgroundRef}
+    >
+
+      {/* =================================
             NEBULA
-    ============================ */}
+      ================================= */}
 
-    <div className="nebula nebula1"></div>
-    <div className="nebula nebula2"></div>
-    <div className="nebula nebula3"></div>
+      <div className="nebula nebula1"></div>
 
-    {/* ===========================
+      <div className="nebula nebula2"></div>
+
+      <div className="nebula nebula3"></div>
+
+
+      {/* =================================
             CENTER GLOW
-    ============================ */}
+      ================================= */}
 
-    <div className="centerGlow"></div>
+      <div className="centerGlow"></div>
 
-    {/* ===========================
+
+      {/* =================================
             STARS
-    ============================ */}
+      ================================= */}
 
-    <div className="stars">
+      <div className="stars">
+
+        {
+
+          stars.map(star => (
+
+            <span
+
+              key={star.id}
+
+              className={`
+                star
+                ${star.type}
+                ${star.blue ? "blue" : "white"}
+              `}
+
+              style={{
+
+                left: `${star.x}%`,
+
+                top: `${star.y}%`,
+
+                opacity: star.opacity,
+
+                animationDuration:
+                  `${star.duration}s`,
+
+                animationDelay:
+                  `${star.delay}s`
+
+              }}
+
+            />
+
+          ))
+
+        }
+
+      </div>
+
+
+      {/* =================================
+            FLOATING ORBS
+      ================================= */}
 
       {
 
-        stars.map(star=>(
+        orbs.map((orb, index) => (
 
-          <span
+          <div
 
-            key={star.id}
+            key={index}
 
-            className={
-
-              `star
-               ${star.type}
-               ${star.blue?"blue":"white"}`
-
-            }
+            className={`
+              orb
+              ${orb.type}
+              motion-${orb.motion}
+              ${orb.blurClass}
+            `}
 
             style={{
 
-              left:`${star.x}%`,
-              top:`${star.y}%`,
-              opacity:star.opacity,
-              animationDuration:`${star.duration}s`,
-              animationDelay:`${star.delay}s`
+              left: `${orb.x}%`,
+
+              top: `${orb.y}%`,
+
+              width: orb.size,
+
+              height: orb.size,
+
+              "--radius": orb.radius
 
             }}
 
@@ -222,97 +319,61 @@ radius:"9px"
 
       }
 
-    </div>
 
-    {/* ===========================
-            ORBS
-    ============================ */}
+      {/* =================================
+            METEORS
+      ================================= */}
 
-    {
+      <div className="meteors">
 
-      orbs.map((orb,index)=>(
+        {
 
-        <div
+          meteors.map(meteor => (
 
-          key={index}
+            <span
 
-          className={
+              key={meteor.id}
 
-`orb
-${orb.type}
-motion-${orb.motion}
-${orb.blurClass}`
+              className="meteor"
 
-}
+              style={{
 
-          style={{
+                left: `${meteor.left}%`,
 
-            left:`${orb.x}%`,
-            top:`${orb.y}%`,
-            width:orb.size,
-            height:orb.size,
-            "--radius":orb.radius
+                top: `${meteor.top}%`,
 
-          }}
+                "--meteor-length":
+                  `${meteor.length}px`,
 
-        />
+                "--meteor-duration":
+                  `${meteor.duration}s`,
 
-      ))
+                "--meteor-delay":
+                  `${meteor.delay}s`,
 
-    }
+                "--meteor-opacity":
+                  meteor.opacity
 
-    {/* ===========================
-          DOT GRID
-    ============================ */}
+              }}
 
-    <div className="dotGrid">
+            />
 
-      {
+          ))
 
-        [...Array(64)].map((_,i)=>
+        }
 
-          <span key={i}></span>
+      </div>
 
-        )
 
-      }
 
-    </div>
+      {/* =================================
+            EDGE FADE
+      ================================= */}
 
-    {/* ===========================
-          BLUE BARS
-    ============================ */}
-
-    <div className="bars">
-
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-
-    </div>
-
-    {/* ===========================
-          CHECKER
-    ============================ */}
-
-    <div className="checker">
-
-      {
-
-        [...Array(25)].map((_,i)=>
-
-          <span key={i}></span>
-
-        )
-
-      }
-
-    </div>
       <div className="edgeFade"></div>
-</div>
 
-);
+    </div>
+
+  );
 
 }

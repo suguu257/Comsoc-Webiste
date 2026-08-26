@@ -2,280 +2,518 @@
    CIRCULAR TEXT
 ========================================================== */
 
-.circularText{
+.circularText {
 
-    position:absolute;
+    position: absolute;
 
-    inset:0;
+    inset: 0;
 
-    animation-play-state:running;
+    width: 100%;
+    height: 100%;
 
-    pointer-events:none;
+    animation-play-state: running;
 
-    user-select:none;
+    pointer-events: none;
+
+    user-select: none;
 
 }
+
 
 /* ==========================================================
    LETTERS
 ========================================================== */
 
-.circularText span{
+.circularText span {
 
-    position:absolute;
+    position: absolute;
 
-    display:flex;
+    display: flex;
 
-    justify-content:center;
+    justify-content: center;
 
-    align-items:center;
+    align-items: center;
 
-    transform-origin:center;
+    transform-origin: center;
 
-    font-family:"Tiny5", monospace;
-font-size:18px;
-font-weight:400;
+    font-family: "Tiny5", monospace;
 
-    font-size:15px;
+    font-size: 22.5px;
 
-    font-weight:400;
+    font-weight: 400;
 
-    color:#F6FAFF;
+    color: #f6faff;
 
-    white-space:pre;
+    white-space: pre;
 
-    letter-spacing:0;
+    letter-spacing: 0;
 
-    line-height:1;
+    line-height: 1;
+
+    opacity: .9;
 
     text-shadow:
 
-        0 0 4px rgba(255,255,255,.18),
+        0 0 4px rgba(255,255,255,.35),
 
-        0 0 12px rgba(70,160,255,.18);
+        0 0 10px rgba(110,190,255,.45),
+
+        0 0 22px rgba(70,150,255,.25);
 
     transition:
 
-        color .4s ease,
+        color .5s ease,
 
-        text-shadow .4s ease;
+        opacity .5s ease,
+
+        text-shadow .5s ease;
 
 }
+
 
 /* ==========================================================
    OUTER RING
 ========================================================== */
 
-.outerRing{
+.outerRing::before {
 
-    position:absolute;
+    content: "";
 
-    width:570px;
+    position: absolute;
 
-    height:570px;
+    inset: 0;
 
-    display:flex;
+    border-radius: 50%;
 
-    justify-content:center;
+    border:
 
-    align-items:center;
+        1px solid
+
+        rgba(105,185,255,.32);
+
+    box-shadow:
+
+        0 0 8px
+        rgba(90,170,255,.20),
+
+        0 0 20px
+        rgba(70,150,255,.14),
+
+        0 0 45px
+        rgba(50,120,255,.10);
+
+    animation:
+
+        outerRingPulse
+        6s ease-in-out
+        infinite;
+
+}
+
+
+/* ==========================================================
+   OUTER RING ATMOSPHERIC GLOW
+========================================================== */
+
+.outerRing::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -12px;
+
+    border-radius: 50%;
+
+    border:
+
+        1px solid
+
+        rgba(80,160,255,.13);
+
+    filter: blur(7px);
+
+    box-shadow:
+
+        0 0 30px
+        rgba(70,150,255,.18),
+
+        0 0 70px
+        rgba(50,120,255,.12),
+
+        0 0 120px
+        rgba(40,100,255,.06);
+
+    animation:
+
+        outerAtmosphere
+        7s ease-in-out
+        infinite;
 
 }
 
-/* Thin ring */
-
-.outerRing::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:50%;
-
-    border:1px solid rgba(120,190,255,.16);
-
-}
-
-/* Glow */
-
-.outerRing::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-4px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(70,150,255,.08);
-
-    filter:blur(10px);
-
-}
 
 /* ==========================================================
    INNER RING
 ========================================================== */
 
-.innerRing{
+.innerRing::before {
 
-    position:absolute;
+    content: "";
 
-    width:380px;
+    position: absolute;
 
-    height:380px;
+    inset: 0;
 
-    display:flex;
+    border-radius: 50%;
 
-    justify-content:center;
+    border:
 
-    align-items:center;
+        1px solid
+
+        rgba(125,200,255,.30);
+
+    box-shadow:
+
+        0 0 8px
+        rgba(90,175,255,.22),
+
+        0 0 22px
+        rgba(70,150,255,.17),
+
+        0 0 45px
+        rgba(50,120,255,.10);
+
+    animation:
+
+        innerRingPulse
+        5s ease-in-out
+        infinite;
+
+}
+
+
+/* ==========================================================
+   INNER RING ATMOSPHERIC GLOW
+========================================================== */
+
+.innerRing::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -9px;
+
+    border-radius: 50%;
+
+    border:
+
+        1px solid
+
+        rgba(80,165,255,.14);
+
+    filter: blur(6px);
+
+    box-shadow:
+
+        0 0 25px
+        rgba(70,150,255,.20),
+
+        0 0 55px
+        rgba(50,120,255,.13),
+
+        0 0 90px
+        rgba(40,100,255,.07);
+
+    animation:
+
+        innerAtmosphere
+        5.5s ease-in-out
+        infinite;
 
 }
 
-.innerRing::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:50%;
-
-    border:1px solid rgba(120,190,255,.12);
-
-}
-
-.innerRing::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-4px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(70,150,255,.07);
-
-    filter:blur(8px);
-
-}
 
 /* ==========================================================
    OUTER ROTATION
 ========================================================== */
 
-.outerRing .circularText{
+.outerRing .circularText {
 
-animation:rotateOuter 60s linear infinite;
+    animation:
+
+        rotateOuter
+        60s
+        linear
+        infinite;
 
 }
 
-.innerRing .circularText{
-
-animation:rotateInner 48s linear infinite;
-
-}
 
 /* ==========================================================
    INNER ROTATION
 ========================================================== */
 
-/* ==========================================================
-   HOVER
-========================================================== */
+.innerRing .circularText {
 
-.hero:hover .outerRing .circularText{
+    animation:
 
-    animation-duration:24s;
-
-}
-
-.hero:hover .innerRing .circularText{
-
-    animation-duration:20s;
+        rotateInner
+        48s
+        linear
+        infinite;
 
 }
+
 
 /* ==========================================================
-   ANIMATIONS
+   HOVER — SPEED UP RINGS
 ========================================================== */
 
-@keyframes rotateOuter{
+.hero:hover .outerRing .circularText {
 
-    from{
-
-        transform:rotate(0deg);
-
-    }
-
-    to{
-
-        transform:rotate(360deg);
-
-    }
+    animation-duration: 26s;
 
 }
 
-@keyframes rotateInner{
 
-    from{
+.hero:hover .innerRing .circularText {
 
-        transform:rotate(360deg);
-
-    }
-
-    to{
-
-        transform:rotate(0deg);
-
-    }
+    animation-duration: 21s;
 
 }
+
 
 /* ==========================================================
-   RESPONSIVE
+   HOVER — LETTER GLOW
 ========================================================== */
 
-@media(max-width:900px){
+.hero:hover .circularText span {
 
-.outerRing{
-
-width:560px;
-
-height:560px;
-
-}
-
-.innerRing{
-
-width:390px;
-
-height:390px;
-
-}
-
-.circularText span{
-
-font-size:12px;
-
-}
-
-}
-
-.bullet{
-
-    color:#5EB8FF;
+    opacity: 1;
 
     text-shadow:
 
-        0 0 8px rgba(94,184,255,.8),
+        0 0 5px #ffffff,
 
-        0 0 18px rgba(94,184,255,.4);
+        0 0 12px rgba(120,205,255,.85),
+
+        0 0 28px rgba(70,160,255,.60),
+
+        0 0 50px rgba(50,120,255,.25);
+
+}
+
+
+/* ==========================================================
+   OUTER ROTATION
+========================================================== */
+
+@keyframes rotateOuter {
+
+    from {
+
+        transform: rotate(0deg);
+
+    }
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   INNER ROTATION
+========================================================== */
+
+@keyframes rotateInner {
+
+    from {
+
+        transform: rotate(360deg);
+
+    }
+
+    to {
+
+        transform: rotate(0deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   OUTER RING PULSE
+========================================================== */
+
+@keyframes outerRingPulse {
+
+    0%,
+    100% {
+
+        opacity: .55;
+
+        box-shadow:
+
+            0 0 8px
+            rgba(90,170,255,.16),
+
+            0 0 20px
+            rgba(70,150,255,.10),
+
+            0 0 45px
+            rgba(50,120,255,.06);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        box-shadow:
+
+            0 0 10px
+            rgba(100,190,255,.30),
+
+            0 0 30px
+            rgba(70,160,255,.22),
+
+            0 0 65px
+            rgba(50,120,255,.12);
+
+    }
+
+}
+
+
+/* ==========================================================
+   OUTER ATMOSPHERE
+========================================================== */
+
+@keyframes outerAtmosphere {
+
+    0%,
+    100% {
+
+        opacity: .35;
+
+        transform: scale(.99);
+
+        filter: blur(8px);
+
+    }
+
+    50% {
+
+        opacity: .85;
+
+        transform: scale(1.015);
+
+        filter: blur(4px);
+
+    }
+
+}
+
+
+/* ==========================================================
+   INNER RING PULSE
+========================================================== */
+
+@keyframes innerRingPulse {
+
+    0%,
+    100% {
+
+        opacity: .55;
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* ==========================================================
+   INNER ATMOSPHERE
+========================================================== */
+
+@keyframes innerAtmosphere {
+
+    0%,
+    100% {
+
+        opacity: .30;
+
+        transform: scale(.99);
+
+        filter: blur(7px);
+
+    }
+
+    50% {
+
+        opacity: .85;
+
+        transform: scale(1.02);
+
+        filter: blur(3px);
+
+    }
+
+}
+
+
+/* ==========================================================
+   BULLET
+========================================================== */
+
+.bullet {
+
+    color: #5eb8ff;
+
+    text-shadow:
+
+        0 0 5px rgba(94,184,255,.9),
+
+        0 0 12px rgba(94,184,255,.75),
+
+        0 0 25px rgba(70,150,255,.5);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE TEXT
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .circularText span {
+
+        font-size: 18px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .circularText span {
+
+        font-size: 14px;
+
+    }
 
 }

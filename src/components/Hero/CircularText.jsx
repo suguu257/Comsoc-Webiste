@@ -9,7 +9,8 @@ export default function CircularText({
 
   const chars = [...text];
 
-  // Give different angular weights to different characters
+  // Give different angular 
+  // ights to different characters
   const weights = chars.map((char) => {
     if (char === " ") return 0.15;   // smaller gap
     if (char === "•") return 0.9;    // bigger separator

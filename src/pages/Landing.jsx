@@ -1,18 +1,14 @@
-import Background from "../components/Background/Background";
 import Hero from "../components/Hero/Hero";
+import Background from "../components/Background/Background";
 
-export default function Landing() {
+export default function Landing({ onEnter }) {
+  return (
+    <section className="landing">
 
-    return (
+      <Background />
 
-        <section className="landing">
+      <Hero onEnter={onEnter} />
 
-            <Background />
-
-            <Hero />
-
-        </section>
-
-    );
-
+    </section>
+  );
 }
