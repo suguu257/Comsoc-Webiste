@@ -1,0 +1,217 @@
+/* ===================================
+NAVBAR
+=================================== */
+
+.navbar{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:90px;
+
+padding:0 70px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+z-index:100;
+
+backdrop-filter:blur(8px);
+
+background:
+
+linear-gradient(
+
+180deg,
+
+rgba(0,0,0,.45),
+
+rgba(0,0,0,0)
+
+);
+
+}
+
+/* ===================================
+LOGO
+=================================== */
+
+.navbarLogo{
+
+font-family:"Tiny5", monospace;
+
+font-size:24px;
+
+letter-spacing:2px;
+
+color:white;
+
+text-shadow:
+
+0 0 8px rgba(70,150,255,.35);
+
+}
+
+/* ===================================
+LINKS
+=================================== */
+
+.navbarLinks{
+
+display:flex;
+
+gap:48px;
+
+align-items:center;
+
+}
+
+/* ===================================
+LINK
+=================================== */
+
+.navbarLinks a{
+
+position:relative;
+
+font-family:"Tiny5", monospace;
+
+font-size:18px;
+
+text-decoration:none;
+
+color:rgba(255,255,255,.82);
+
+transition:.35s;
+
+}
+
+.navbarLinks a:hover{
+
+color:white;
+
+text-shadow:
+
+0 0 10px rgba(100,200,255,.6);
+
+}
+
+/* ===================================
+ACTIVE
+=================================== */
+
+.navbarLinks a.active{
+
+color:white;
+
+}
+
+.navbarLinks a.active::after{
+
+content:"";
+
+position:absolute;
+
+left:50%;
+
+bottom:-12px;
+
+transform:translateX(-50%);
+
+width:36px;
+
+height:2px;
+
+background:#56c8ff;
+
+border-radius:10px;
+
+box-shadow:
+
+0 0 12px #56c8ff;
+
+}
+
+/* ===================================
+ROCKET DOCK
+=================================== */
+
+#rocketDock{
+
+position:absolute;
+
+width:42px;
+
+height:42px;
+
+left:calc(50% - 310px);
+
+top:24px;
+
+/* Invisible for now */
+
+}
+
+/* ===================================
+ENTRANCE
+=================================== */
+
+.navbar{
+
+animation:navbarFade 1.4s ease;
+
+}
+
+@keyframes navbarFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(-40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.rocketDock{
+
+position:absolute;
+
+left:132px;
+
+top:50%;
+
+width:20px;
+
+height:20px;
+
+transform:translateY(-50%);
+
+pointer-events:none;
+
+}
+
+#rocketDockPoint{
+
+width:100%;
+
+height:100%;
+
+}

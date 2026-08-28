@@ -1,0 +1,2096 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600;700&display=swap');
+
+
+/* =======================================================
+   PAGE
+======================================================= */
+
+.page {
+
+  position: relative;
+
+  width: 100vw;
+  min-height: 100vh;
+
+  background: #020306;
+
+  color: #eef2f9;
+
+  font-family: 'Pixelify Sans', monospace;
+
+  overflow: hidden;
+
+}
+
+
+/* =======================================================
+   HERO
+======================================================= */
+
+.hero {
+
+  position: relative;
+
+  z-index: 5;
+
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  margin-top: 11vh;
+
+  text-align: center;
+
+}
+
+
+/* =======================================================
+   IEEE
+======================================================= */
+
+.ieee-row {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  /*
+     IEEE stays toward the left,
+     while COMSOC is independently centered.
+  */
+
+  padding-left: 17vw;
+
+  gap: 28px;
+
+  animation:
+    ieeeReveal
+    1.8s
+    cubic-bezier(.22,.75,.25,1)
+    both;
+
+}
+
+
+/* =======================================================
+   IEEE SPARKLE
+======================================================= */
+
+.icon-sparkle {
+
+  flex-shrink: 0;
+
+  filter:
+    drop-shadow(
+      0 0 8px
+      rgba(100,160,255,.55)
+    )
+
+    drop-shadow(
+      0 0 24px
+      rgba(70,120,255,.3)
+    );
+
+  animation:
+    sparkleFloat
+    7s
+    ease-in-out
+    infinite;
+
+  transform-origin: center;
+
+}
+
+
+@keyframes sparkleFloat {
+
+  0%,
+  100% {
+
+    transform:
+      translate3d(0,0,0)
+      rotate(0deg)
+      scale(1);
+
+  }
+
+  50% {
+
+    transform:
+      translate3d(0,-7px,0)
+      rotate(8deg)
+      scale(1.08);
+
+  }
+
+}
+
+
+/* =======================================================
+   IEEE TEXT
+======================================================= */
+
+.ieee-text {
+
+  position: relative;
+
+  font-family:
+    'Pixelify Sans',
+    monospace;
+
+  font-weight: 700;
+
+  font-size:
+    clamp(
+      110px,
+      14vw,
+      210px
+    );
+
+  line-height: .82;
+
+  letter-spacing: 5px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      #2d69ff 0%,
+      #609cff 25%,
+      #cbd8ed 58%,
+      #8b93a1 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 0 24px
+    rgba(65,125,255,.16);
+
+}
+
+
+/* =======================================================
+   IEEE SMOOTH ENTRANCE
+======================================================= */
+
+@keyframes ieeeReveal {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translate3d(-28px,14px,0)
+      scale(.96);
+
+    filter: blur(8px);
+
+  }
+
+  30% {
+
+    opacity: .55;
+
+    transform:
+      translate3d(-9px,4px,0)
+      scale(.985);
+
+    filter: blur(3px);
+
+  }
+
+  65% {
+
+    opacity: 1;
+
+    transform:
+      translate3d(2px,-1px,0)
+      scale(1.005);
+
+    filter: blur(0);
+
+  }
+
+  82% {
+
+    transform:
+      translate3d(-1px,1px,0)
+      scale(.998);
+
+  }
+
+  100% {
+
+    opacity: 1;
+
+    transform:
+      translate3d(0,0,0)
+      scale(1);
+
+    filter: blur(0);
+
+  }
+
+}
+
+
+/* =======================================================
+   RING
+======================================================= */
+
+.ring {
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  border: 3px solid #3d6fff;
+
+  box-shadow:
+
+    0 0 10px
+    rgba(70,120,255,.65),
+
+    0 0 28px
+    rgba(70,100,255,.28);
+
+  animation:
+    ringPulse
+    4.5s
+    ease-in-out
+    infinite;
+
+}
+
+
+@keyframes ringPulse {
+
+  0%,
+  100% {
+
+    transform: scale(.94);
+
+    opacity: .65;
+
+  }
+
+  50% {
+
+    transform: scale(1.14);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+/* =======================================================
+   COMSOC
+======================================================= */
+
+.comsoc-wrap {
+
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-top: 22px;
+
+  animation:
+
+    comsocReveal
+    2s
+    cubic-bezier(.22,.75,.25,1)
+    .35s
+    both;
+
+}
+
+
+/* =======================================================
+   COMSOC GLOW
+======================================================= */
+
+.comsoc-glow {
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 72%;
+  height: 155%;
+
+  transform:
+    translate(-50%,-50%);
+
+  background:
+
+    radial-gradient(
+      ellipse at center,
+
+      rgba(65,145,255,.26),
+
+      rgba(75,110,255,.13)
+      35%,
+
+      rgba(120,75,255,.065)
+      58%,
+
+      transparent
+      78%
+    );
+
+  filter: blur(48px);
+
+  animation:
+    glowPulse
+    8s
+    ease-in-out
+    infinite;
+
+  pointer-events: none;
+
+}
+
+
+@keyframes glowPulse {
+
+  0%,
+  100% {
+
+    opacity: .55;
+
+    transform:
+      translate(-50%,-50%)
+      scale(.94);
+
+  }
+
+  50% {
+
+    opacity: 1;
+
+    transform:
+      translate(-50%,-50%)
+      scale(1.08);
+
+  }
+
+}
+
+
+/* =======================================================
+   COMSOC TEXT
+======================================================= */
+
+.comsoc-text {
+
+  position: relative;
+
+  z-index: 1;
+
+  font-family:
+    'Pixelify Sans',
+    monospace;
+
+  font-weight: 700;
+
+  font-size:
+    clamp(
+      120px,
+      15vw,
+      230px
+    );
+
+  line-height: .8;
+
+  letter-spacing: 8px;
+
+  color: #f5f8ff;
+
+  text-shadow:
+
+    0 0 10px
+    rgba(255,255,255,.34),
+
+    0 0 28px
+    rgba(100,175,255,.42),
+
+    0 0 65px
+    rgba(75,105,255,.28),
+
+    0 0 110px
+    rgba(50,100,255,.14);
+
+  animation:
+    comsocBreath
+    7s
+    ease-in-out
+    infinite
+    alternate;
+
+}
+
+
+/* =======================================================
+   COMSOC SMOOTH ENTRANCE
+======================================================= */
+
+@keyframes comsocReveal {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translate3d(0,28px,0)
+      scale(.965);
+
+    filter: blur(9px);
+
+  }
+
+  30% {
+
+    opacity: .55;
+
+    transform:
+      translate3d(0,9px,0)
+      scale(.985);
+
+    filter: blur(3px);
+
+  }
+
+  65% {
+
+    opacity: 1;
+
+    transform:
+      translate3d(0,-2px,0)
+      scale(1.008);
+
+    filter: blur(0);
+
+  }
+
+  82% {
+
+    transform:
+      translate3d(0,1px,0)
+      scale(.998);
+
+  }
+
+  100% {
+
+    opacity: 1;
+
+    transform:
+      translate3d(0,0,0)
+      scale(1);
+
+    filter: blur(0);
+
+  }
+
+}
+
+
+@keyframes comsocBreath {
+
+  0% {
+
+    text-shadow:
+
+      0 0 8px
+      rgba(255,255,255,.22),
+
+      0 0 24px
+      rgba(90,165,255,.24),
+
+      0 0 50px
+      rgba(70,100,255,.13);
+
+  }
+
+  100% {
+
+    text-shadow:
+
+      0 0 12px
+      rgba(255,255,255,.45),
+
+      0 0 34px
+      rgba(100,180,255,.42),
+
+      0 0 75px
+      rgba(80,90,255,.23);
+
+  }
+
+}
+
+
+/* =======================================================
+   REFERENCE STARS
+======================================================= */
+
+.reference-stars {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+}
+
+
+.reference-star {
+
+  position: absolute;
+
+  display: block;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  box-shadow:
+
+    0 0 5px #ffffff,
+
+    0 0 12px
+    rgba(110,200,255,.95),
+
+    0 0 30px
+    rgba(70,120,255,.55);
+
+  animation:
+    starPulse
+    6s
+    ease-in-out
+    infinite;
+
+}
+
+
+/* horizontal ray */
+
+.reference-star::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 42px;
+  height: 1px;
+
+  transform:
+    translate(-50%,-50%);
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(225,247,255,.95),
+      transparent
+    );
+
+}
+
+
+/* vertical ray */
+
+.reference-star::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 1px;
+  height: 42px;
+
+  transform:
+    translate(-50%,-50%);
+
+  background:
+
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(225,247,255,.95),
+      transparent
+    );
+
+}
+
+
+@keyframes starPulse {
+
+  0%,
+  100% {
+
+    opacity: .2;
+
+    transform:
+      scale(.55);
+
+  }
+
+  25% {
+
+    opacity: .5;
+
+    transform:
+      scale(.75);
+
+  }
+
+  52% {
+
+    opacity: 1;
+
+    transform:
+      scale(1.2);
+
+  }
+
+  70% {
+
+    opacity: .55;
+
+    transform:
+      scale(.84);
+
+  }
+
+}
+
+
+/* =======================================================
+   GLOWING FLOATING BOXES
+======================================================= */
+
+.glowBoxes {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+}
+
+
+.gBox {
+
+  position: absolute;
+
+  border-radius: 9px;
+
+  border:
+    1px solid
+    rgba(155,205,255,.48);
+
+  background:
+
+    linear-gradient(
+      135deg,
+      rgba(70,135,255,.14),
+      rgba(100,70,255,.055)
+    );
+
+  box-shadow:
+
+    inset 0 0 18px
+    rgba(180,225,255,.12),
+
+    0 0 18px
+    rgba(75,145,255,.32),
+
+    0 0 45px
+    rgba(55,110,255,.18);
+
+  backdrop-filter: blur(3px);
+
+  animation:
+    boxFloat
+    18s
+    cubic-bezier(.45,.05,.55,.95)
+    infinite;
+
+}
+
+
+/* =======================================================
+   BOX POSITIONS
+======================================================= */
+
+.b1 {
+
+  width: 38px;
+  height: 38px;
+
+  left: 7%;
+  top: 39%;
+
+}
+
+
+.b2 {
+
+  width: 23px;
+  height: 23px;
+
+  right: 10%;
+  top: 31%;
+
+  animation-delay: -5s;
+
+}
+
+
+.b3 {
+
+  width: 32px;
+  height: 32px;
+
+  right: 27%;
+  bottom: 25%;
+
+  animation-delay: -9s;
+
+}
+
+
+.b4 {
+
+  width: 20px;
+  height: 20px;
+
+  left: 31%;
+  bottom: 23%;
+
+  animation-delay: -13s;
+
+}
+
+
+@keyframes boxFloat {
+
+  0% {
+
+    transform:
+      translate3d(0,0,0)
+      rotate(0deg)
+      scale(.9);
+
+    opacity: .35;
+
+  }
+
+  25% {
+
+    transform:
+      translate3d(10px,-13px,0)
+      rotate(4deg)
+      scale(1);
+
+    opacity: .58;
+
+  }
+
+  50% {
+
+    transform:
+      translate3d(-13px,-27px,0)
+      rotate(10deg)
+      scale(1.08);
+
+    opacity: .78;
+
+  }
+
+  75% {
+
+    transform:
+      translate3d(8px,-12px,0)
+      rotate(5deg)
+      scale(.97);
+
+    opacity: .52;
+
+  }
+
+  100% {
+
+    transform:
+      translate3d(0,0,0)
+      rotate(0deg)
+      scale(.9);
+
+    opacity: .35;
+
+  }
+
+}
+
+
+/* =======================================================
+   FLOATING SQUARES
+======================================================= */
+
+.deco {
+
+  position: absolute;
+
+  z-index: 4;
+
+  pointer-events: none;
+
+  will-change:
+    transform,
+    opacity;
+
+}
+
+
+.soft-square {
+
+  border-radius: 11px;
+
+  animation:
+    softSquareFloat
+    18s
+    cubic-bezier(.45,.05,.55,.95)
+    infinite;
+
+}
+
+
+/* =======================================================
+   WHITE SQUARE
+======================================================= */
+
+.soft-square.white {
+
+  background:
+
+    linear-gradient(
+      135deg,
+      rgba(245,250,255,.42),
+      rgba(175,215,255,.20)
+    );
+
+  border:
+    1px solid
+    rgba(220,240,255,.58);
+
+  box-shadow:
+
+    0 0 16px
+    rgba(255,255,255,.28),
+
+    0 0 38px
+    rgba(120,185,255,.28),
+
+    0 0 70px
+    rgba(80,140,255,.12),
+
+    inset 0 0 18px
+    rgba(255,255,255,.14);
+
+  backdrop-filter: blur(3px);
+
+}
+
+
+/* =======================================================
+   BLUE SQUARE
+======================================================= */
+
+.soft-square.blue {
+
+  background:
+
+    linear-gradient(
+      135deg,
+      rgba(55,115,255,.62),
+      rgba(75,90,220,.32)
+    );
+
+  border:
+    1px solid
+    rgba(105,165,255,.68);
+
+  box-shadow:
+
+    0 0 16px
+    rgba(55,120,255,.58),
+
+    0 0 38px
+    rgba(55,100,255,.38),
+
+    0 0 75px
+    rgba(60,80,255,.18),
+
+    inset 0 0 18px
+    rgba(120,180,255,.15);
+
+  backdrop-filter: blur(3px);
+
+}
+
+
+/* =======================================================
+   NATURAL SQUARE MOVEMENT
+======================================================= */
+
+@keyframes softSquareFloat {
+
+  0% {
+
+    transform:
+      translate3d(0,0,0)
+      rotate(0deg)
+      scale(.96);
+
+    opacity: .5;
+
+  }
+
+  20% {
+
+    transform:
+
+      translate3d(
+        calc(var(--dx) * .25),
+        calc(var(--dy) * .15),
+        0
+      )
+
+      rotate(3deg)
+      scale(1);
+
+    opacity: .72;
+
+  }
+
+  45% {
+
+    transform:
+
+      translate3d(
+        calc(var(--dx) * -.55),
+        calc(var(--dy) * .75),
+        0
+      )
+
+      rotate(-5deg)
+      scale(1.05);
+
+    opacity: .9;
+
+  }
+
+  65% {
+
+    transform:
+
+      translate3d(
+        var(--dx),
+        var(--dy),
+        0
+      )
+
+      rotate(7deg)
+      scale(1.08);
+
+    opacity: .72;
+
+  }
+
+  82% {
+
+    transform:
+
+      translate3d(
+        calc(var(--dx) * .35),
+        calc(var(--dy) * .35),
+        0
+      )
+
+      rotate(2deg)
+      scale(1);
+
+    opacity: .62;
+
+  }
+
+  100% {
+
+    transform:
+      translate3d(0,0,0)
+      rotate(0deg)
+      scale(.96);
+
+    opacity: .5;
+
+  }
+
+}
+
+
+/* =======================================================
+   BOTTOM RIGHT PIXEL GROUP
+======================================================= */
+
+.pixel-scatter {
+
+  position: absolute;
+
+  right: 7%;
+  bottom: 12%;
+
+  width: 82px;
+  height: 82px;
+
+  z-index: 6;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,17px);
+
+  grid-template-rows:
+    repeat(3,17px);
+
+  gap: 5px;
+
+  transform: rotate(18deg);
+
+  animation:
+    pixelGroupFloat
+    14s
+    ease-in-out
+    infinite;
+
+}
+
+
+.pixel {
+
+  width: 17px;
+  height: 17px;
+
+  border-radius: 3px;
+
+  opacity: .72;
+
+  animation:
+    pixelGlow
+    4s
+    ease-in-out
+    infinite;
+
+}
+
+
+.pixel:nth-child(1) {
+
+  grid-column: 1;
+  grid-row: 1;
+
+}
+
+
+.pixel:nth-child(2) {
+
+  grid-column: 3;
+  grid-row: 1;
+
+  animation-delay: -.8s;
+
+}
+
+
+.pixel:nth-child(3) {
+
+  grid-column: 2;
+  grid-row: 2;
+
+  animation-delay: -1.5s;
+
+}
+
+
+.pixel:nth-child(4) {
+
+  grid-column: 1;
+  grid-row: 3;
+
+  animation-delay: -2.1s;
+
+}
+
+
+.pixel:nth-child(5) {
+
+  grid-column: 3;
+  grid-row: 3;
+
+  animation-delay: -2.8s;
+
+}
+
+
+.pixel.blue {
+
+  background: #3f75ff;
+
+  box-shadow:
+
+    0 0 15px
+    rgba(60,115,255,.65),
+
+    0 0 32px
+    rgba(60,100,255,.25);
+
+}
+
+
+.pixel.white {
+
+  background: #edf3fb;
+
+  box-shadow:
+
+    0 0 14px
+    rgba(255,255,255,.45),
+
+    0 0 28px
+    rgba(150,200,255,.2);
+
+}
+
+
+@keyframes pixelGlow {
+
+  0%,
+  100% {
+
+    opacity: .45;
+
+    transform:
+      scale(.9);
+
+  }
+
+  50% {
+
+    opacity: .95;
+
+    transform:
+      scale(1.08);
+
+  }
+
+}
+
+
+@keyframes pixelGroupFloat {
+
+  0%,
+  100% {
+
+    transform:
+      rotate(18deg)
+      translate3d(0,0,0);
+
+  }
+
+  50% {
+
+    transform:
+      rotate(22deg)
+      translate3d(-9px,-11px,0);
+
+  }
+
+}
+
+
+/* =======================================================
+   VIT CHAPTER
+======================================================= */
+
+.vit-block {
+
+  position: relative;
+
+  z-index: 5;
+
+  margin-top: 18vh;
+
+  padding: 0 7%;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 24px;
+
+  animation:
+    heroIn
+    1.2s
+    cubic-bezier(.22,.8,.32,1)
+    .9s
+    both;
+
+}
+
+
+.eq-icon {
+
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 4px;
+
+  height: 48px;
+
+}
+
+
+.eq-icon span {
+
+  width: 6px;
+
+  border-radius: 3px;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #4f8bff,
+      #7fe0ff
+    );
+
+  box-shadow:
+    0 0 9px
+    rgba(80,150,255,.4);
+
+  animation:
+    eqBounce
+    2s
+    ease-in-out
+    infinite;
+
+  transform-origin: bottom;
+
+}
+
+
+.vit-text-col {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+
+}
+
+
+.vit-text {
+
+  font-family:
+    'Pixelify Sans',
+    monospace;
+
+  font-weight: 600;
+
+  font-size:
+
+    clamp(
+      28px,
+      3.5vw,
+      42px
+    );
+
+  letter-spacing: 3px;
+
+  color: #eef3fb;
+
+  text-shadow:
+    0 0 12px
+    rgba(100,170,255,.2);
+
+}
+
+
+.vit-decoration {
+
+  display: flex;
+
+  align-items: center;
+
+}
+
+
+/* =======================================================
+   VIT HORIZONTAL BAR
+======================================================= */
+
+.gradient-bar {
+
+  display: flex;
+
+  align-items: center;
+
+  height: 30px;
+
+  width:
+    min(
+      38vw,
+      410px
+    );
+
+}
+
+
+.gradient-bar .cap {
+
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+}
+
+
+.gradient-bar .cap.blue {
+
+  background: #3b6bff;
+
+  box-shadow:
+    0 0 16px
+    rgba(59,107,255,.65);
+
+}
+
+
+.gradient-bar .cap.white {
+
+  background: #f2f6ff;
+
+  box-shadow:
+    0 0 12px
+    rgba(255,255,255,.55);
+
+}
+
+
+.gradient-bar .lines {
+
+  position: relative;
+
+  flex: 1;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  background:
+
+    repeating-linear-gradient(
+      180deg,
+
+      rgba(255,255,255,.7)
+      0px,
+
+      rgba(255,255,255,.7)
+      1px,
+
+      transparent
+      1px,
+
+      transparent
+      4px
+    ),
+
+    linear-gradient(
+      90deg,
+      #3b6bff,
+      #5fd0ff 55%,
+      #eaf6ff
+    );
+
+  opacity: .95;
+
+  box-shadow:
+    0 0 12px
+    rgba(80,160,255,.35);
+
+}
+
+
+/* moving highlight through bar */
+
+.gradient-bar .lines::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: -30%;
+
+  width: 30%;
+
+  height: 100%;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.8),
+      transparent
+    );
+
+  filter: blur(2px);
+
+  animation:
+    barSweep
+    4.5s
+    ease-in-out
+    infinite;
+
+}
+
+
+@keyframes barSweep {
+
+  0% {
+
+    left: -30%;
+
+    opacity: 0;
+
+  }
+
+  20% {
+
+    opacity: .8;
+
+  }
+
+  65% {
+
+    left: 100%;
+
+    opacity: .75;
+
+  }
+
+  100% {
+
+    left: 120%;
+
+    opacity: 0;
+
+  }
+
+}
+
+
+.mini-bars {
+
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 3px;
+
+  height: 24px;
+
+  margin-left: 12px;
+
+}
+
+
+.mini-bars span {
+
+  width: 4px;
+
+  border-radius: 2px;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #4f8bff,
+      #7fe0ff
+    );
+
+  box-shadow:
+    0 0 7px
+    rgba(70,150,255,.45);
+
+  animation:
+    eqBounce
+    1.7s
+    ease-in-out
+    infinite;
+
+  transform-origin: bottom;
+
+}
+
+
+/* =======================================================
+   BOTTOM LEFT LONG GLOW
+======================================================= */
+
+.bottom-light {
+
+  position: absolute;
+
+  left: -160px;
+
+  bottom: -115px;
+
+  width: 700px;
+  height: 330px;
+
+  z-index: 4;
+
+  pointer-events: none;
+
+  transform: rotate(-10deg);
+
+}
+
+
+/* =======================================================
+   CENTRAL LIGHT CORE
+======================================================= */
+
+.light-core {
+
+  position: absolute;
+
+  left: 20px;
+
+  bottom: 20px;
+
+  width: 300px;
+  height: 110px;
+
+  border-radius: 50%;
+
+  background:
+
+    radial-gradient(
+      ellipse,
+
+      rgba(65,170,255,.28),
+
+      rgba(70,90,255,.09)
+      45%,
+
+      transparent
+      74%
+    );
+
+  filter: blur(25px);
+
+  animation:
+    lightPulse
+    7s
+    ease-in-out
+    infinite;
+
+}
+
+
+/* =======================================================
+   LIGHT TRAILS
+======================================================= */
+
+.light-line {
+
+  position: absolute;
+
+  left: -20px;
+
+  border-radius: 50%;
+
+  border-top-style: solid;
+
+  transform-origin:
+    left center;
+
+  pointer-events: none;
+
+}
+
+
+/* =======================================================
+   MAIN LIGHT TRAIL
+======================================================= */
+
+.line-one {
+
+  bottom: 34px;
+
+  width: 650px;
+  height: 165px;
+
+  border-top-width: 2px;
+
+  border-color:
+    rgba(95,205,255,.86);
+
+  filter:
+
+    drop-shadow(
+      0 0 3px
+      rgba(110,220,255,.95)
+    )
+
+    drop-shadow(
+      0 0 9px
+      rgba(70,185,255,.78)
+    )
+
+    drop-shadow(
+      0 0 22px
+      rgba(50,120,255,.48)
+    );
+
+  animation:
+    beamOne
+    9s
+    ease-in-out
+    infinite;
+
+}
+
+
+/* =======================================================
+   SECOND LIGHT TRAIL
+======================================================= */
+
+.line-two {
+
+  bottom: 58px;
+
+  left: 8px;
+
+  width: 590px;
+  height: 135px;
+
+  border-top-width: 2px;
+
+  border-color:
+    rgba(105,130,255,.68);
+
+  filter:
+
+    drop-shadow(
+      0 0 4px
+      rgba(95,130,255,.78)
+    )
+
+    drop-shadow(
+      0 0 14px
+      rgba(75,100,255,.52)
+    );
+
+  animation:
+    beamTwo
+    12s
+    ease-in-out
+    infinite;
+
+}
+
+
+/* =======================================================
+   THIRD LIGHT TRAIL
+======================================================= */
+
+.line-three {
+
+  bottom: 80px;
+
+  left: -2px;
+
+  width: 530px;
+  height: 108px;
+
+  border-top-width: 1px;
+
+  border-color:
+    rgba(210,240,255,.58);
+
+  filter:
+
+    drop-shadow(
+      0 0 5px
+      rgba(180,225,255,.7)
+    );
+
+  animation:
+    beamThree
+    10s
+    ease-in-out
+    infinite;
+
+}
+
+
+/* =======================================================
+   LIGHT TRAIL ANIMATIONS
+======================================================= */
+
+@keyframes beamOne {
+
+  0%,
+  100% {
+
+    transform:
+      translateX(-8px)
+      scaleX(.98);
+
+    opacity: .62;
+
+  }
+
+  50% {
+
+    transform:
+      translateX(28px)
+      scaleX(1.025);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+@keyframes beamTwo {
+
+  0%,
+  100% {
+
+    transform:
+      translateX(8px)
+      scale(.985);
+
+    opacity: .42;
+
+  }
+
+  50% {
+
+    transform:
+      translateX(-18px)
+      scale(1.025);
+
+    opacity: .78;
+
+  }
+
+}
+
+
+@keyframes beamThree {
+
+  0%,
+  100% {
+
+    transform:
+      translateX(0);
+
+    opacity: .32;
+
+  }
+
+  50% {
+
+    transform:
+      translateX(26px);
+
+    opacity: .65;
+
+  }
+
+}
+
+
+@keyframes lightPulse {
+
+  0%,
+  100% {
+
+    transform:
+      scale(.92);
+
+    opacity: .42;
+
+  }
+
+  50% {
+
+    transform:
+      scale(1.08);
+
+    opacity: .82;
+
+  }
+
+}
+
+
+/* =======================================================
+   BOTTOM CTA
+======================================================= */
+
+.bottom-cta-wrap {
+
+  position: relative;
+
+  z-index: 5;
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 10vh;
+
+}
+
+
+.bottom-cta {
+
+  width:
+    min(
+      24vw,
+      260px
+    );
+
+  height: 64px;
+
+  border-radius:
+    18px 18px 0 0;
+
+  background:
+    rgba(10,14,24,.85);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-bottom: none;
+
+  transform:
+    translateY(50%);
+
+}
+
+
+/* =======================================================
+   SHARED
+======================================================= */
+
+@keyframes heroIn {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(20px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0);
+
+  }
+
+}
+
+
+@keyframes eqBounce {
+
+  0%,
+  100% {
+
+    transform:
+      scaleY(.55);
+
+  }
+
+  50% {
+
+    transform:
+      scaleY(1);
+
+  }
+
+}
+
+
+/* =======================================================
+   MOBILE
+======================================================= */
+
+@media (max-width: 760px) {
+
+  .hero {
+
+    margin-top: 11vh;
+
+  }
+
+
+  .ieee-row {
+
+    padding-left: 7vw;
+
+    gap: 14px;
+
+  }
+
+
+  .ieee-text {
+
+    font-size:
+      clamp(
+        76px,
+        19vw,
+        125px
+      );
+
+  }
+
+
+  .comsoc-text {
+
+    font-size:
+      clamp(
+        82px,
+        20vw,
+        140px
+      );
+
+    letter-spacing: 4px;
+
+  }
+
+
+  .comsoc-wrap {
+
+    margin-top: 20px;
+
+  }
+
+
+  .vit-block {
+
+    margin-top: 15vh;
+
+    flex-wrap: wrap;
+
+  }
+
+
+  .vit-text {
+
+    font-size: 28px;
+
+  }
+
+
+  .gradient-bar {
+
+    width: 55vw;
+
+  }
+
+
+  .bottom-light {
+
+    left: -280px;
+
+    transform:
+      rotate(-10deg)
+      scale(.75);
+
+    transform-origin:
+      left bottom;
+
+  }
+
+
+  .pixel-scatter {
+
+    right: 4%;
+    bottom: 9%;
+
+    transform:
+      rotate(18deg)
+      scale(.75);
+
+  }
+
+}

@@ -1,13 +1,32 @@
+import { useState } from "react";
+
 import Landing from "./pages/Landing";
+import Home from "./pages/Home";
+import HyperspeedTransition
+  from "./components/Hyperspeed/HyperspeedTransition";
 
-function App() {
+export default function App() {
 
-    return (
+  const [stage, setStage] = useState("landing");
 
-        <Landing/>
+  return (
+    <>
+      {stage === "landing" && (
+        <Landing
+          onEnter={() => setStage("hyper")}
+        />
+      )}
 
-    );
+      {stage === "hyper" && (
+        <HyperspeedTransition
+          active={true}
+          onComplete={() => setStage("home")}
+        />
+      )}
 
+      {stage === "home" && (
+        <Home />
+      )}
+    </>
+  );
 }
-
-export default App;

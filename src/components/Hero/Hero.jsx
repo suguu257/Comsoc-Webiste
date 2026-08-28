@@ -1,54 +1,58 @@
 import "./Hero.css";
 import CircularText from "./CircularText";
 
-export default function Hero() {
+export default function Hero({ onEnter }) {
 
-    return (
+  return (
 
-        <section className="hero">
+    <section className="hero">
 
-            {/* OUTER RING */}
+      {/* ================================
+          OUTER RING
+      ================================= */}
 
-           <div className="outerRing">
+      <div className="outerRing">
 
-<CircularText
+        <CircularText
+          text="WELCOME TO COMSOC • WELCOME TO COMSOC • WELCOME TO COMSOC • WELCOME TO COMSOC •"
+          radius={250}
+        />
 
-text="WELCOME TO COMSOC • WELCOME TO COMSOC • WELCOME TO COMSOC • WELCOME TO COMSOC • "
+      </div>
 
-radius={280}
 
-/>
+      {/* ================================
+          INNER RING
+      ================================= */}
 
-</div>
+      <div className="innerRing">
 
-            {/* INNER RING */}
+        <CircularText
+          text="WELCOME TO COMSOC • WELCOME TO COMSOC • WELCOME TO COMSOC • WELCOME TO COMSOC •"
+          radius={180}
+          reverse
+        />
 
-            <div className="innerRing">
+      </div>
 
-<CircularText
 
-text="WELCOME TO COMSOC • WELCOME TO COMSOC • WELCOME TO COMSOC • WELCOME TO COMSOC • WELCOME TO COMSOC •"
+      {/* ================================
+          CENTER
+      ================================= */}
 
-radius={180}
+      <button
+        className="heroCenter"
+        onClick={onEnter}
+        aria-label="Enter IEEE COMSOC"
+      >
 
-reverse
+        <h1>IEEE</h1>
 
-/>
+        <h2>COMSOC</h2>
 
-</div>
+      </button>
 
-            {/* IEEE */}
+    </section>
 
-            <div className="heroCenter">
-
-<h1>IEEE</h1>
-
-<h2>COMSOC</h2>
-
-</div>
-
-        </section>
-
-    );
-
+  );
 }

@@ -1,86 +1,609 @@
-/* =======================================
-HERO
-======================================= */
+/* ==========================================================
+   HERO
+========================================================== */
+
 .hero {
-    position: relative;
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
-    height: 100vh;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: visible;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   CENTER CONTENT
+========================================================== */
+
+.heroCenter {
+
+    position: absolute;
+
+    left: 50%;
+    top: 43%;
+
+    transform: translate(-50%, -50%);
 
     display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 2px;
+
+    margin: 0;
+    padding: 20px 35px;
+
+    background: transparent;
+
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    z-index: 20;
+
+    transition:
+        transform .8s cubic-bezier(.16, 1, .3, 1),
+        filter .8s ease;
+}
+
+
+/* ==========================================================
+   IEEE
+========================================================== */
+
+.heroCenter h1 {
+
+    margin: 0;
+
+    font-family: "Tiny5", monospace;
+
+    font-size: 70px;
+
+    letter-spacing: 4px;
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    color: #ffffff;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.38),
+        0 0 24px rgba(70,150,255,.28),
+        0 0 55px rgba(50,110,255,.14);
+
+    transition:
+        text-shadow .7s ease,
+        transform .7s cubic-bezier(.16,1,.3,1);
+}
+
+
+/* ==========================================================
+   COMSOC
+========================================================== */
+
+.heroCenter h2 {
+
+    margin: 0;
+
+    font-family: "Tiny5", monospace;
+
+    font-size: 60px;
+
+    letter-spacing: 4px;
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    color: #ffffff;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.38),
+        0 0 26px rgba(70,150,255,.30),
+        0 0 60px rgba(50,110,255,.16);
+
+    transition:
+        text-shadow .7s ease,
+        transform .7s cubic-bezier(.16,1,.3,1);
+}
+
+
+/* ==========================================================
+   CENTER HOVER
+========================================================== */
+
+.heroCenter:hover {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.035);
+
+    filter:
+        drop-shadow(
+            0 0 22px rgba(70,150,255,.30)
+        );
+}
+
+
+.heroCenter:hover h1 {
+
+    text-shadow:
+        0 0 10px #ffffff,
+        0 0 25px rgba(80,160,255,.80),
+        0 0 60px rgba(50,110,255,.45);
+
+}
+
+
+.heroCenter:hover h2 {
+
+    text-shadow:
+        0 0 10px #ffffff,
+        0 0 30px rgba(80,160,255,.90),
+        0 0 70px rgba(50,110,255,.50);
+
+}
+
+
+/* ==========================================================
+   RINGS
+========================================================== */
+
+.outerRing,
+.innerRing {
+
+    position: absolute;
+
+    display: flex;
+
     justify-content: center;
     align-items: center;
 
-    z-index: 5;
     pointer-events: none;
-}
-/* =======================================
-CENTER
-======================================= */
 
-.heroCenter{
-
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:2px;
-
+    overflow: visible;
 }
 
-.heroCenter h1{
 
-font-family:"Tiny5",monospace;
+/* ==========================================================
+   OUTER RING
+========================================================== */
 
-font-size:70px;
+.outerRing {
 
-letter-spacing:4px;
+    left: 50%;
+    top: 43%;
 
-font-weight:400;
+    width: 570px;
+    height: 570px;
 
-color:white;
+    transform: translate(-50%, -50%);
 
-text-transform:uppercase;
-
-opacity:.92;
-
-
-text-shadow:
-0 0 10px rgba(255,255,255,.35),
-0 0 30px rgba(70,150,255,.18);
-
+    z-index: 5;
 }
 
-.heroCenter h2{
 
-font-family:"Tiny5",monospace;
+/* ==========================================================
+   OUTER PHYSICAL RING
+========================================================== */
 
-font-size:60px;
+.outerRing::before {
 
-letter-spacing:4px;
+    content: "";
 
-font-weight:400;
+    position: absolute;
 
-color:white;
+    inset: 0;
 
-text-transform:uppercase;
+    border-radius: 50%;
 
-opacity:.92;
+    border: 1px solid rgba(105,175,255,.18);
+
+    box-shadow:
+        0 0 8px rgba(75,155,255,.16),
+        0 0 24px rgba(65,145,255,.08);
+
+    animation:
+        outerRingPulse 6s ease-in-out infinite;
 
 }
 
-/* =======================================
-OUTER
-======================================= */
 
-.outerRing,
-.innerRing{
+/* ==========================================================
+   OUTER SOFT GLOW
+========================================================== */
 
-position:absolute;
+.outerRing::after {
 
-display:flex;
+    content: "";
 
-justify-content:center;
+    position: absolute;
 
-align-items:center;
+    inset: -18px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(70,145,255,.08);
+
+    filter: blur(14px);
+
+    box-shadow:
+        0 0 35px rgba(45,125,255,.12),
+        0 0 75px rgba(45,115,255,.07),
+        0 0 110px rgba(45,105,255,.04);
+
+    animation:
+        outerGlow 7s ease-in-out infinite;
+
+}
+
+
+/* ==========================================================
+   INNER RING
+========================================================== */
+
+.innerRing {
+
+    left: 50%;
+    top: 43%;
+
+    width: 380px;
+    height: 380px;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 6;
+}
+
+
+/* ==========================================================
+   INNER PHYSICAL RING
+========================================================== */
+
+.innerRing::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(115,185,255,.15);
+
+    box-shadow:
+        0 0 8px rgba(70,150,255,.14),
+        0 0 22px rgba(60,140,255,.07);
+
+    animation:
+        innerRingPulse 5s ease-in-out infinite;
+
+}
+
+
+/* ==========================================================
+   INNER SOFT GLOW
+========================================================== */
+
+.innerRing::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -14px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(70,150,255,.07);
+
+    filter: blur(11px);
+
+    box-shadow:
+        0 0 28px rgba(55,135,255,.11),
+        0 0 55px rgba(55,125,255,.06);
+
+    animation:
+        innerGlow 6s ease-in-out infinite;
+
+}
+
+
+/* ==========================================================
+   CIRCULAR TEXT
+========================================================== */
+
+.outerRing .circularText {
+
+    animation:
+        rotateOuter 60s linear infinite;
+
+}
+
+
+.innerRing .circularText {
+
+    animation:
+        rotateInner 48s linear infinite;
+
+}
+
+
+/* ==========================================================
+   HOVER — SPEED UP RINGS
+========================================================== */
+
+.hero:hover .outerRing .circularText {
+
+    animation-duration: 28s;
+
+}
+
+
+.hero:hover .innerRing .circularText {
+
+    animation-duration: 22s;
+
+}
+
+
+/* ==========================================================
+   OUTER RING PULSE
+========================================================== */
+
+@keyframes outerRingPulse {
+
+    0%,
+    100% {
+
+        opacity: .55;
+
+        box-shadow:
+            0 0 8px rgba(75,155,255,.12),
+            0 0 24px rgba(65,145,255,.06);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        box-shadow:
+            0 0 12px rgba(75,165,255,.22),
+            0 0 32px rgba(65,145,255,.12);
+
+    }
+
+}
+
+
+/* ==========================================================
+   OUTER GLOW
+========================================================== */
+
+@keyframes outerGlow {
+
+    0%,
+    100% {
+
+        opacity: .35;
+
+        transform: scale(1);
+
+    }
+
+    50% {
+
+        opacity: .75;
+
+        transform: scale(1.018);
+
+    }
+
+}
+
+
+/* ==========================================================
+   INNER RING PULSE
+========================================================== */
+
+@keyframes innerRingPulse {
+
+    0%,
+    100% {
+
+        opacity: .5;
+
+        box-shadow:
+            0 0 8px rgba(70,150,255,.10),
+            0 0 22px rgba(60,140,255,.05);
+
+    }
+
+    50% {
+
+        opacity: .95;
+
+        box-shadow:
+            0 0 12px rgba(70,160,255,.20),
+            0 0 30px rgba(60,145,255,.10);
+
+    }
+
+}
+
+
+/* ==========================================================
+   INNER GLOW
+========================================================== */
+
+@keyframes innerGlow {
+
+    0%,
+    100% {
+
+        opacity: .3;
+
+        transform: scale(1);
+
+    }
+
+    50% {
+
+        opacity: .65;
+
+        transform: scale(1.015);
+
+    }
+
+}
+
+
+/* ==========================================================
+   ROTATION
+========================================================== */
+
+@keyframes rotateOuter {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+@keyframes rotateInner {
+
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .outerRing {
+
+        width: 560px;
+        height: 560px;
+
+    }
+
+    .innerRing {
+
+        width: 390px;
+        height: 390px;
+
+    }
+
+    .heroCenter h1 {
+
+        font-size: 62px;
+
+    }
+
+    .heroCenter h2 {
+
+        font-size: 52px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .outerRing {
+
+        width: 420px;
+        height: 420px;
+
+    }
+
+    .innerRing {
+
+        width: 285px;
+        height: 285px;
+
+    }
+
+    .heroCenter {
+
+        top: 43%;
+
+    }
+
+    .outerRing,
+    .innerRing {
+
+        /* keep the complete composition inside smaller screens */
+
+    }
+
+    .heroCenter h1 {
+
+        font-size: 48px;
+
+    }
+
+    .heroCenter h2 {
+
+        font-size: 40px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .outerRing .circularText,
+    .innerRing .circularText,
+    .outerRing::before,
+    .outerRing::after,
+    .innerRing::before,
+    .innerRing::after {
+
+        animation: none;
+
+    }
 
 }
