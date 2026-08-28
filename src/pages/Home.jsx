@@ -3,6 +3,7 @@ import { useMemo } from "react";
 
 import Background from "../components/Background/Background";
 import Navbar from "../components/Navbar/Navbar";
+import Events from "../components/Events/Events";
 
 /* =========================================================
    SMALL 4-POINT STAR
@@ -165,6 +166,7 @@ export default function Home() {
   );
 
   return (
+    <>
     <div className="page">
 
       <Background />
@@ -405,5 +407,9 @@ export default function Home() {
       </div>
 
     </div>
+
+    {/* EVENTS SECTION */}
+    <Events />
+    </>
   );
 }

@@ -26,11 +26,10 @@
 ========================================================== */
 
 .heroCenter {
-
     position: absolute;
 
     left: 50%;
-    top: 43%;
+    top: 50%;
 
     transform: translate(-50%, -50%);
 
@@ -190,9 +189,8 @@
 ========================================================== */
 
 .outerRing {
-
     left: 50%;
-    top: 43%;
+    top: 50%;
 
     width: 570px;
     height: 570px;
@@ -201,7 +199,6 @@
 
     z-index: 5;
 }
-
 
 /* ==========================================================
    OUTER PHYSICAL RING
@@ -263,9 +260,8 @@
 ========================================================== */
 
 .innerRing {
-
     left: 50%;
-    top: 43%;
+    top: 50%;
 
     width: 380px;
     height: 380px;
@@ -274,7 +270,6 @@
 
     z-index: 6;
 }
-
 
 /* ==========================================================
    INNER PHYSICAL RING
@@ -563,16 +558,10 @@
 
     .heroCenter {
 
-        top: 43%;
+        top: 50%;
 
     }
 
-    .outerRing,
-    .innerRing {
-
-        /* keep the complete composition inside smaller screens */
-
-    }
 
     .heroCenter h1 {
 
@@ -606,4 +595,39 @@
 
     }
 
+}
+
+
+/* ==========================================================
+   LANDING HERO OVERRIDE
+   Prevent Home.css .hero from affecting the landing wheel
+========================================================== */
+
+.landing .hero {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: visible;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+.landing .hero:hover .outerRing .circularText {
+    animation-duration: 28s;
+}
+
+.landing .hero:hover .innerRing .circularText {
+    animation-duration: 22s;
 }
