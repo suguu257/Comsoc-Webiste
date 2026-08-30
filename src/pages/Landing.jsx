@@ -1,14 +1,16 @@
-import Hero from "../components/Hero/Hero";
 import Background from "../components/Background/Background";
+import Hero from "../components/Hero/Hero";
 
 export default function Landing({ onEnter }) {
-  return (
-    <section className="landing">
+    return (
+        <section className="landing">
+            <Background />
 
-      <Background />
+            <main className="landing-content">
+                <Hero onEnter={onEnter} />
 
-      <Hero onEnter={onEnter} />
-
-    </section>
-  );
+                {/* About Us will go here */}
+            </main>
+        </section>
+    );
 }
