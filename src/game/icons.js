@@ -1,0 +1,37 @@
+import {
+  GiRocket,
+  GiRadarSweep,
+  GiPlanetCore,
+  GiFlyingFlag,
+  GiFilmStrip,
+  GiThreeFriends,
+  GiRadioTower,
+  GiConsoleController,
+  GiTrophyCup,
+  GiLightningArc,
+  GiSpeaker,
+  GiEnvelope,
+  GiMoon,
+  GiWarpPipe,
+  GiGamepad,
+} from "react-icons/gi";
+import { BsTerminal } from "react-icons/bs";
+
+export const ACHIEVEMENT_ICONS = {
+  rocket: GiRocket,
+  signal: GiRadarSweep,
+  planet: GiPlanetCore,
+  flag: GiFlyingFlag,
+  film: GiFilmStrip,
+  crew: GiThreeFriends,
+  antenna: GiRadioTower,
+  terminal: BsTerminal,
+  warp: GiWarpPipe,
+  gamepad: GiConsoleController,
+  trophy: GiTrophyCup,
+  bolt: GiLightningArc,
+  sound: GiSpeaker,
+  mail: GiEnvelope,
+  moon: GiMoon,
+  arcade: GiGamepad,
+};

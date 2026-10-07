@@ -1,0 +1,75 @@
+.rocket {
+  --thrust: 0.4;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 70;
+  width: 40px;
+  height: 60px;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 0 10px rgba(63, 242, 255, 0.45));
+}
+
+.rocket-bob {
+  position: absolute;
+  inset: 0;
+  animation: rocketBob 2.4s ease-in-out infinite;
+}
+
+.rocket-body {
+  width: 40px;
+  height: 44px;
+}
+
+/* =========================================================
+   FLAME (scales with --thrust)
+========================================================= */
+
+.rocket-flame {
+  position: absolute;
+  left: 50%;
+  top: 42px;
+  width: 16px;
+  height: 18px;
+  transform-origin: 50% 0;
+  transform: translateX(-50%) scaleY(calc(0.35 + var(--thrust) * 1.6));
+  transition: transform 0.25s;
+}
+
+.rocket-flame span {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  animation: flicker 0.12s steps(2) infinite alternate;
+}
+
+.rocket-flame span:first-child {
+  width: 16px;
+  height: 18px;
+  background: var(--flame);
+  clip-path: polygon(0 0, 100% 0, 75% 55%, 50% 100%, 25% 55%);
+  box-shadow: 0 0 16px var(--flame);
+}
+
+.rocket-flame span:last-child {
+  width: 8px;
+  height: 11px;
+  background: #fff6c9;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  animation-delay: 0.06s;
+}
+
+@keyframes flicker {
+  to {
+    transform: translateX(-50%) scaleY(0.78) scaleX(0.9);
+  }
+}
+
+@keyframes rocketBob {
+  50% {
+    transform: translateY(-3px);
+  }
+}

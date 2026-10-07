@@ -1,0 +1,63 @@
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, #060b1c 0%, var(--bg) 70%);
+}
+
+.starfield canvas {
+  position: absolute;
+  inset: 0;
+}
+
+/* =========================================================
+   NEBULA
+========================================================= */
+
+.nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  animation: nebulaDrift 40s ease-in-out infinite alternate;
+}
+
+.nebula-a {
+  width: 60vw;
+  height: 50vh;
+  left: -15vw;
+  top: 10vh;
+  background: radial-gradient(circle, rgba(47, 95, 224, 0.28), transparent 70%);
+}
+
+.nebula-b {
+  width: 55vw;
+  height: 55vh;
+  right: -18vw;
+  top: 40vh;
+  background: radial-gradient(circle, rgba(120, 70, 255, 0.18), transparent 70%);
+  animation-duration: 55s;
+}
+
+.nebula-c {
+  width: 40vw;
+  height: 40vh;
+  left: 30vw;
+  bottom: -20vh;
+  background: radial-gradient(circle, rgba(63, 242, 255, 0.1), transparent 70%);
+  animation-duration: 48s;
+}
+
+@keyframes nebulaDrift {
+  to {
+    transform: translate(6vw, -4vh) scale(1.15);
+  }
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.75) 100%);
+}
