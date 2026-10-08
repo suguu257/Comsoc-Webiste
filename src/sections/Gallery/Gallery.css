@@ -1,0 +1,161 @@
+.gallery {
+  position: relative;
+}
+
+.gallery-stage {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.gallery-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+  /* above distant memories (z-index = depth + 5000), below near ones */
+  z-index: 3600;
+}
+
+.gallery-center .section-head {
+  margin-bottom: 8px;
+}
+
+.gallery-counter {
+  font-family: var(--font-pixel);
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  text-shadow: 0 0 12px var(--cyan-soft);
+}
+
+.gallery-hint {
+  font-family: var(--font-tiny);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+}
+
+/* =========================================================
+   MEMORIES
+========================================================= */
+
+.memory {
+  position: absolute;
+  width: clamp(200px, 24vw, 400px);
+  aspect-ratio: 4 / 3;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.memory.is-near {
+  pointer-events: auto;
+}
+
+.memory-inner {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  border: 2px solid rgba(160, 200, 255, 0.35);
+  box-shadow: 0 0 0 4px rgba(2, 3, 6, 0.8), 0 20px 60px rgba(0, 0, 0, 0.6);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.4s, border-color 0.4s;
+}
+
+.memory:hover .memory-inner,
+.memory:focus-visible .memory-inner {
+  transform: scale(1.06);
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 4px rgba(2, 3, 6, 0.8), 0 0 30px var(--cyan-soft), 0 0 70px rgba(63, 242, 255, 0.2);
+}
+
+.memory-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
+}
+
+.memory:hover .memory-img {
+  transform: scale(1.05);
+}
+
+.memory-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 12px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 12px),
+    linear-gradient(135deg, hsl(var(--h) 60% 24%), hsl(calc(var(--h) + 50) 70% 8%));
+}
+
+/* Pixel "mountains + sun" photo icon */
+.memory-icon {
+  width: 44px;
+  height: 34px;
+  background:
+    linear-gradient(#fff, #fff) 30px 6px / 8px 8px no-repeat,
+    linear-gradient(45deg, transparent 50%, hsl(var(--h) 80% 70%) 50%) 0 14px / 20px 20px no-repeat,
+    linear-gradient(-45deg, transparent 50%, hsl(var(--h) 80% 60%) 50%) 20px 14px / 20px 20px no-repeat;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  image-rendering: pixelated;
+}
+
+.memory-label {
+  font-family: var(--font-pixel);
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+
+.memory-sub {
+  font-family: var(--font-tiny);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* =========================================================
+   REDUCED MOTION: plain grid
+========================================================= */
+
+.gallery.is-static .gallery-stage {
+  height: auto;
+  padding: 120px var(--gutter);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+  perspective: none;
+}
+
+.gallery.is-static .gallery-center {
+  position: static;
+  grid-column: 1 / -1;
+}
+
+.gallery.is-static .memory {
+  position: relative;
+  left: auto !important;
+  top: auto !important;
+  width: 100%;
+  transform: none !important;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 760px) {
+  .memory {
+    width: 56vw;
+  }
+}

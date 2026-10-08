@@ -1,0 +1,51 @@
+.cursor-trail {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  pointer-events: none;
+}
+
+.reticle {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.reticle.is-visible {
+  opacity: 1;
+}
+
+.reticle-ring {
+  position: absolute;
+  left: -14px;
+  top: -14px;
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(63, 242, 255, 0.8);
+  /* gaps make it read as a targeting reticle */
+  clip-path: polygon(0 0, 38% 0, 38% 10%, 62% 10%, 62% 0, 100% 0, 100% 38%, 90% 38%, 90% 62%, 100% 62%, 100% 100%, 62% 100%, 62% 90%, 38% 90%, 38% 100%, 0 100%, 0 62%, 10% 62%, 10% 38%, 0 38%);
+  transition: transform 0.25s var(--ease-out), border-color 0.2s;
+}
+
+.reticle-dot {
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  box-shadow: 0 0 6px var(--cyan);
+}
+
+.reticle.is-locked .reticle-ring {
+  transform: scale(1.5) rotate(45deg);
+  border-color: var(--gold);
+}
+
+.reticle.is-down .reticle-ring {
+  transform: scale(0.8) rotate(45deg);
+}

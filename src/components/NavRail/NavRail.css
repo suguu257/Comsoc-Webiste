@@ -1,0 +1,148 @@
+/* =========================================================
+   RAIL (desktop: vertical, right edge)
+========================================================= */
+
+.rail {
+  --progress: 0;
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: clamp(26px, 6vh, 52px);
+  transform: translateY(-50%);
+  opacity: 0.35;
+  transition: opacity 0.8s;
+}
+
+.rail.is-live {
+  opacity: 1;
+}
+
+.rail-line {
+  position: absolute;
+  right: 9px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 12px);
+}
+
+.rail-progress {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--blue-2), var(--cyan));
+  box-shadow: 0 0 10px var(--cyan-soft);
+  transform-origin: top;
+  transform: scaleY(var(--progress));
+}
+
+.rail-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 2px 0;
+}
+
+.rail-dot {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+}
+
+.rail-dot::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #2a3550;
+  box-shadow: 0 0 0 2px #0b1430;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.rail-marker.is-visited .rail-dot::before {
+  background: var(--blue-2);
+}
+
+/* The rocket covers the active dot; leave a halo behind it */
+.rail-marker.is-active .rail-dot::before {
+  background: transparent;
+  box-shadow: 0 0 0 2px var(--cyan), 0 0 18px var(--cyan);
+  transform: scale(2.4) rotate(45deg);
+}
+
+.rail-label {
+  display: flex;
+  gap: 8px;
+  font-family: var(--font-tiny);
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.3s, transform 0.3s, color 0.3s;
+  white-space: nowrap;
+  padding-right: 32px;
+}
+
+.rail-label em {
+  font-style: normal;
+  color: var(--blue-2);
+}
+
+.rail:hover .rail-label,
+.rail-marker:focus-visible .rail-label,
+.rail-marker.is-active .rail-label {
+  opacity: 1;
+  transform: none;
+}
+
+.rail-marker.is-active .rail-label,
+.rail-marker:hover .rail-label {
+  color: var(--text);
+  text-shadow: 0 0 10px var(--cyan-soft);
+}
+
+/* =========================================================
+   PHONES: bottom dock
+========================================================= */
+
+@media (max-width: 760px) {
+  .rail {
+    top: auto;
+    right: 50%;
+    bottom: 14px;
+    flex-direction: row;
+    align-items: center;
+    gap: 22px;
+    padding: 12px 18px 10px;
+    transform: translateX(50%);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+  }
+
+  .rail-line {
+    left: 22px;
+    right: 22px;
+    top: 50%;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+    background: repeating-linear-gradient(to right, var(--line) 0 6px, transparent 6px 12px);
+  }
+
+  .rail-progress {
+    transform-origin: left;
+    transform: scaleX(var(--progress));
+    background: linear-gradient(to right, var(--blue-2), var(--cyan));
+  }
+
+  .rail-label {
+    display: none;
+  }
+}

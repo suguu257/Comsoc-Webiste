@@ -1,0 +1,37 @@
+.fragment {
+  position: absolute;
+  z-index: 6;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+}
+
+.fragment span {
+  width: 6px;
+  height: 6px;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan), 0 0 0 3px rgba(63, 242, 255, 0.12);
+  animation: fragmentPulse 2.6s steps(4) infinite;
+}
+
+.fragment:hover span {
+  transform: scale(1.8) rotate(45deg);
+  box-shadow: 0 0 16px var(--cyan), 0 0 0 6px rgba(63, 242, 255, 0.2);
+}
+
+.fragment.is-popping span {
+  animation: fragmentPop 0.7s steps(6) forwards;
+}
+
+@keyframes fragmentPulse {
+  0%, 60% { opacity: 0.25; }
+  70%, 90% { opacity: 1; }
+}
+
+@keyframes fragmentPop {
+  to {
+    transform: scale(6) rotate(180deg);
+    opacity: 0;
+  }
+}

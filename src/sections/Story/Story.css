@@ -1,0 +1,174 @@
+.story {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.story-sat,
+.story-planet,
+.story-comet {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 0 12px rgba(79, 139, 255, 0.4));
+}
+
+.story-sat {
+  left: 54%;
+  top: 11%;
+  animation: floaty 9s ease-in-out infinite;
+}
+
+.story-planet {
+  right: 4%;
+  bottom: 14%;
+  animation: floaty 12s ease-in-out infinite reverse;
+}
+
+.story-comet {
+  right: 8%;
+  top: 6%;
+  opacity: 0.8;
+}
+
+@keyframes floaty {
+  50% {
+    translate: 0 -14px;
+  }
+}
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.story-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+  max-width: 1240px;
+}
+
+/* =========================================================
+   TRANSMISSION LOG
+========================================================= */
+
+.log {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 40px rgba(47, 107, 255, 0.08);
+}
+
+.log-head {
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 12px 18px;
+  font-family: var(--font-tiny);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--line);
+}
+
+.log-rec {
+  color: #ff5c8a;
+  animation: blink 1.2s steps(2) infinite;
+}
+
+.log-progress {
+  color: var(--cyan);
+}
+
+.log-body {
+  padding: clamp(20px, 3vw, 34px);
+  font-size: clamp(17px, 1.45vw, 21px);
+  line-height: 1.7;
+  color: #d9e2f2;
+}
+
+.log-body p + p {
+  margin-top: 1em;
+}
+
+.log-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-top: 0.6em;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  animation: blink 1s steps(2) infinite;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 18px 18px;
+  border: 1px solid var(--line);
+  background: rgba(6, 10, 22, 0.7);
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.stat:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 22px var(--cyan-soft);
+  transform: translateY(-4px);
+}
+
+.stat-label {
+  font-family: var(--font-tiny);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+}
+
+.stat-number {
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  font-size: clamp(36px, 4vw, 54px);
+  line-height: 1;
+  color: var(--text);
+  text-shadow: 0 0 18px rgba(79, 139, 255, 0.5);
+}
+
+.stat-bar {
+  height: 4px;
+  background: repeating-linear-gradient(90deg, var(--blue-2) 0 8px, transparent 8px 11px);
+  opacity: 0.6;
+}
+
+@media (max-width: 900px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .story-planet {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats {
+    gap: 10px;
+  }
+
+  .stat {
+    padding: 14px 12px;
+  }
+}

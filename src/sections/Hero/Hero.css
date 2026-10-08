@@ -1,0 +1,212 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+}
+
+.hero-stage {
+  position: absolute;
+  inset: var(--hud-h) 0 0;
+  will-change: transform;
+}
+
+.hero-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.hero-line {
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  fill: url(#hero-fill);
+}
+
+.hero-line.is-sub {
+  fill: #cfe3ff;
+}
+
+.hero-title {
+  filter: drop-shadow(0 0 22px rgba(70, 140, 255, 0.35));
+}
+
+.hero.is-live .hero-title {
+  animation: heroGlitch 7s steps(1) infinite;
+}
+
+@keyframes heroGlitch {
+  0%, 94%, 100% { transform: none; filter: drop-shadow(0 0 22px rgba(70, 140, 255, 0.35)); }
+  95% { transform: translate(6px, -2px) skewX(-6deg); filter: drop-shadow(-4px 0 0 rgba(63, 242, 255, 0.7)) drop-shadow(4px 0 0 rgba(255, 60, 120, 0.5)); }
+  96.5% { transform: translate(-4px, 1px); }
+}
+
+/* =========================================================
+   FLIGHT
+========================================================= */
+
+.hero-seg {
+  fill: none;
+  stroke: none;
+}
+
+.hero-trail {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 5;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+
+.hero-trail.orbit {
+  stroke-width: 3;
+  stroke-dasharray: 2 0;
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.hero-logo image {
+  filter: drop-shadow(0 0 18px rgba(63, 242, 255, 0.35));
+}
+
+.hero-ping {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ping 3.2s ease-out infinite;
+}
+
+.hero-ping.delay {
+  animation-delay: 1.6s;
+}
+
+@keyframes ping {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+
+.hero-orbit-ring {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 3;
+  stroke-dasharray: 4 14;
+  opacity: 0.45;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: orbitSpin 30s linear infinite;
+}
+
+@keyframes orbitSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   COUNTDOWN / SKIP
+========================================================= */
+
+.hero-countdown {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  font-size: clamp(56px, 12vw, 160px);
+  letter-spacing: 6px;
+  color: var(--cyan);
+  text-shadow: 0 0 30px var(--cyan-soft);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-skip {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 32px;
+  z-index: 75;
+  padding: 8px 14px;
+  font-family: var(--font-tiny);
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  border: 1px solid var(--line);
+  background: rgba(6, 10, 22, 0.6);
+  animation: blink 1.4s steps(2) infinite;
+}
+
+.hero-skip:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.hero-cta {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(56px, 10vh, 110px);
+  translate: -50% 0;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: max-content;
+  max-width: calc(100% - 32px);
+}
+
+.hero-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  text-align: center;
+  font-family: var(--font-tiny);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+}
+
+.hero-hint > span:first-child {
+  display: inline-block;
+  color: var(--cyan);
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  50% { transform: translateY(4px); }
+}
+
+@media (max-width: 760px) {
+  .hero-cta {
+    bottom: 120px;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+
+  .hero-cta .px-btn {
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 12px 14px;
+  }
+
+  .hero-hint {
+    bottom: 92px;
+    font-size: 10px;
+  }
+
+  .hero-hint-keys {
+    display: none;
+  }
+}

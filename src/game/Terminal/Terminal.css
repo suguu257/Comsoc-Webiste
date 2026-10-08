@@ -1,0 +1,52 @@
+.terminal {
+  height: min(520px, 70vh);
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 15px;
+  color: #3dff9a;
+  background: #020604;
+  text-shadow: 0 0 6px rgba(61, 255, 154, 0.45);
+}
+
+.term-screen {
+  height: 100%;
+  overflow-y: auto;
+  padding: 18px 20px;
+  overscroll-behavior: contain;
+}
+
+.term-screen p {
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.term-screen p.is-cmd {
+  color: #b9ffd9;
+  margin-top: 6px;
+}
+
+.term-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.term-input span {
+  color: var(--cyan);
+  white-space: nowrap;
+}
+
+.term-input input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+  caret-color: #3dff9a;
+  text-shadow: inherit;
+}
+
+html.has-reticle .term-input input {
+  cursor: text !important;
+}
