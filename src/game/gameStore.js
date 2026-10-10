@@ -89,7 +89,7 @@ export function unlock(id) {
   if (!def || game.get().unlocked.includes(id)) return;
 
   game.set((s) => ({ unlocked: [...s.unlocked, id] }));
-  toast({ kind: "achievement", title: def.title, desc: def.desc, icon: def.icon, xp: def.xp });
+  // toast({ kind: "achievement", title: def.title, desc: def.desc, icon: def.icon, xp: def.xp });
   sfx("unlock");
   addXp(def.xp);
 }
