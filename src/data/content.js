@@ -87,7 +87,7 @@ export const EVENTS_BOTTOM = [
    adjust each hotspot to frame that person.
 ========================================================= */
 
-export const BOARD_PHOTO = "/team/board-placeholder.svg";
+export const BOARD_PHOTO = "/team/BOARD_PHOTO.svg";
 
 const member = (id, role, hotspot, extra = {}) => ({
   id,
@@ -101,16 +101,16 @@ const member = (id, role, hotspot, extra = {}) => ({
 
 /* Hotspots match the silhouettes in board-placeholder.svg */
 export const BOARD = [
-  member("chair", "CHAIRPERSON", { x: 43.125, y: 49.4, w: 13.75, h: 50.6 }, { class: "COMMANDER", stats: { LEAD: 98, COMMS: 90, TECH: 80 } }),
-  member("vice-chair", "VICE CHAIRPERSON", { x: 25.625, y: 49.4, w: 13.75, h: 50.6 }, { class: "NAVIGATOR", stats: { LEAD: 92, COMMS: 88, TECH: 78 } }),
-  member("secretary", "SECRETARY", { x: 60.625, y: 49.4, w: 13.75, h: 50.6 }, { class: "ARCHIVIST", stats: { LEAD: 85, COMMS: 94, TECH: 70 } }),
-  member("co-secretary", "CO-SECRETARY", { x: 8.125, y: 49.4, w: 13.75, h: 50.6 }, { class: "ARCHIVIST", stats: { LEAD: 80, COMMS: 90, TECH: 72 } }),
-  member("tech-head", "TECHNICAL HEAD", { x: 78.125, y: 49.4, w: 13.75, h: 50.6 }, { class: "ENGINEER", stats: { LEAD: 82, COMMS: 70, TECH: 99 } }),
-  member("events-head", "EVENTS HEAD", { x: 18.44, y: 22.2, w: 10.625, h: 40 }, { class: "STRATEGIST", stats: { LEAD: 90, COMMS: 86, TECH: 68 } }),
-  member("design-head", "DESIGN HEAD", { x: 31.56, y: 22.2, w: 10.625, h: 40 }, { class: "ARTIFICER", stats: { LEAD: 78, COMMS: 80, TECH: 85 } }),
-  member("publicity-head", "PUBLICITY HEAD", { x: 44.69, y: 22.2, w: 10.625, h: 40 }, { class: "BROADCASTER", stats: { LEAD: 80, COMMS: 99, TECH: 65 } }),
-  member("finance-head", "FINANCE HEAD", { x: 57.81, y: 22.2, w: 10.625, h: 40 }, { class: "QUARTERMASTER", stats: { LEAD: 84, COMMS: 76, TECH: 74 } }),
-  member("mgmt-head", "MANAGEMENT HEAD", { x: 70.94, y: 22.2, w: 10.625, h: 40 }, { class: "OPERATOR", stats: { LEAD: 90, COMMS: 84, TECH: 70 } }),
+  member("chair", "CHAIRPERSON", { x: 34.625, y: 13.4,  w: 10.625, h: 40 }, {name: "Keshav S Kaushish", class: "COMMANDER", stats: { LEAD: 98, COMMS: 90, TECH: 80 } }),
+  member("vice-chair", "VICE CHAIRPERSON", { x: 17.625, y: 24.4,  w: 10.625, h: 40 }, {name: "Srijan Devipur", class: "NAVIGATOR", stats: { LEAD: 92, COMMS: 88, TECH: 78 } }),
+  member("secretary", "SECRETARY", { x: 51.625, y: 15.4,  w: 10.625, h: 40 }, {name: "Ayushman Poddar", class: "ARCHIVIST", stats: { LEAD: 85, COMMS: 94, TECH: 70 } }),
+  member("co-secretary", "CO-SECRETARY", { x: 69.125, y: 23.4,  w: 10.625, h: 40 }, {name: "Hardhik Basotia", class: "ARCHIVIST", stats: { LEAD: 80, COMMS: 90, TECH: 72 } }),
+  member("tech-head", "TECHNICAL HEAD", { x: 4.225, y: 34.4,  w: 10.625, h: 40 }, {name: "Nainika Pathak", class: "ENGINEER", stats: { LEAD: 82, COMMS: 70, TECH: 99 } }),
+  member("events-head", "EVENTS HEAD", { x: 78.525, y: 15, w: 10.625, h: 40 }, {name: "Aadyasha Behera", class: "STRATEGIST", stats: { LEAD: 90, COMMS: 86, TECH: 68 } }),
+  member("design-head", "DESIGN HEAD", { x: 59.56, y: 34.2, w: 10.625, h: 40 }, {name: "Vibhor Gupta", class: "ARTIFICER", stats: { LEAD: 78, COMMS: 80, TECH: 85 } }),
+  member("publicity-head", "PUBLICITY HEAD", { x: 44.69, y: 30.2, w: 10.625, h: 40 }, {name: "Madhur Mishra", class: "BROADCASTER", stats: { LEAD: 80, COMMS: 99, TECH: 65 } }),
+  member("finance-head", "FINANCE HEAD", { x: 85.81, y: 31.2, w: 10.625, h: 40 }, {name: "Anan Jindal", class: "QUARTERMASTER", stats: { LEAD: 84, COMMS: 76, TECH: 74 } }),
+  member("mgmt-head", "MANAGEMENT HEAD", { x: 28.54, y: 31.2, w: 10.625, h: 40 }, {name: "Aniruddh Agarwal", class: "OPERATOR", stats: { LEAD: 90, COMMS: 84, TECH: 70 } }),
 ];
 
 /* =========================================================
