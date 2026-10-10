@@ -373,21 +373,6 @@ export default function Hero() {
         <div className="hero-countdown" aria-hidden="true" />
       </div>
 
-      <div className="hero-cta">
-        <a className="px-btn" href={JOIN_URL} onClick={(e) => {
-          if (JOIN_URL.startsWith("#")) {
-            e.preventDefault();
-            scrollToSection(JOIN_URL.slice(1));
-          }
-          sfx("select");
-        }}>
-          ▶ JOIN COMSOC
-        </a>
-        <button className="px-btn ghost" onClick={() => { scrollToSection("events"); sfx("select"); }}>
-          EXPLORE EVENTS
-        </button>
-      </div>
-
       <p className="hero-hint">
         SCROLL TO EXPLORE <span>▼</span>
         <span className="hero-hint-keys"> &nbsp;·&nbsp; PRESS 1–6 TO JUMP SECTORS</span>
