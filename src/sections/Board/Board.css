@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap');
+
 .board {
   min-height: 100vh;
 }
@@ -8,9 +10,10 @@
 
 .board-hint {
   margin-bottom: clamp(28px, 5vh, 48px);
-  font-family: var(--font-tiny);
+  font-family: 'Bitcount Grid Double', monospace;
   font-size: 12px;
-  letter-spacing: 3px;
+  font-weight: 400;
+  letter-spacing: 2px;
   color: var(--text-dim);
 }
 
@@ -93,9 +96,10 @@
   top: -30px;
   translate: -50% 0;
   padding: 2px 8px;
-  font-family: var(--font-tiny);
-  font-size: 12px;
-  letter-spacing: 2px;
+  font-family: 'Bitcount Grid Double', monospace;
+font-size: 12px;
+font-weight: 500;
+letter-spacing: 1px;
   color: var(--bg);
   background: var(--cyan);
   white-space: nowrap;
@@ -172,24 +176,27 @@
 }
 
 .sc-role {
-  font-family: var(--font-tiny);
-  font-size: 13px;
-  letter-spacing: 3px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
   color: var(--cyan);
 }
 
 .sc-name {
-  font-family: var(--font-pixel);
-  font-weight: 700;
-  font-size: clamp(26px, 2.6vw, 40px);
-  line-height: 1;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-weight: 600;
+  font-size: clamp(24px, 2.3vw, 36px);
+  line-height: 1.15;
+  letter-spacing: 0;
   overflow-wrap: anywhere;
 }
 
 .sc-class {
-  font-family: var(--font-tiny);
-  font-size: 12px;
-  letter-spacing: 2px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 1px;
   color: var(--gold);
 }
 
@@ -257,9 +264,11 @@
   align-items: center;
   padding-top: 12px;
   border-top: 1px dashed var(--line);
-  font-family: var(--font-tiny);
-  letter-spacing: 3px;
+  
   color: var(--text-dim);
+  font-family: 'Bitcount Grid Double', monospace;
+font-size: 12px;
+letter-spacing: 1px;
 }
 
 .sc-nav button {
