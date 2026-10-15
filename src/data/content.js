@@ -87,7 +87,7 @@ export const EVENTS_BOTTOM = [
    adjust each hotspot to frame that person.
 ========================================================= */
 
-export const BOARD_PHOTO = "/team/BOARD_PHOTO.svg";
+export const BOARD_PHOTO = "/team/BOARD_PHOTO.png";
 
 const member = (id, role, hotspot, extra = {}) => ({
   id,

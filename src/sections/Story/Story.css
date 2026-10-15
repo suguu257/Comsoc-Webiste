@@ -1,4 +1,4 @@
-```css
+
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap');
 
 .story {
@@ -206,4 +206,3 @@
     font-size: clamp(28px, 8vw, 36px);
   }
 }
-```
