@@ -230,3 +230,36 @@
     animation: none;
   }
 }
+
+.home-hero-static {
+  display: grid;
+  place-items: center;
+  background: transparent;
+}
+
+.home-hero-static-content {
+  width: 100%;
+  padding: 24px;
+  text-align: center;
+}
+
+.home-hero-static-content h1 {
+  margin: 16px 0;
+  font-family: "Bitcount Grid Double", monospace;
+  font-size: clamp(42px, 8vw, 112px);
+  color: #f6faff;
+  text-shadow: 0 0 30px rgba(70, 140, 255, 0.4);
+}
+
+.home-hero-eyebrow,
+.home-hero-tagline,
+.home-hero-scroll {
+  font-family: "Bitcount Grid Double", monospace;
+  color: #cfe3ff;
+  letter-spacing: 0.15em;
+}
+
+.home-hero-scroll {
+  margin-top: 80px;
+  font-size: 11px;
+}
