@@ -1,246 +1,232 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap');
+
+/* =========================================
+   HERO CONTAINER
+========================================= */
 
 .hero {
   position: relative;
+  width: 100%;
   height: 100vh;
   height: 100svh;
   min-height: 560px;
   overflow: hidden;
+  isolation: isolate;
+  background: #030712;
 }
 
-.hero-stage {
+/* =========================================
+   HYPERSPEED BACKGROUND
+========================================= */
+
+.hero-hyperspeed {
   position: absolute;
-  inset: var(--hud-h) 0 0;
-  will-change: transform;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
 }
 
-.hero-svg {
+.hero-hyperspeed canvas {
+  display: block;
   width: 100%;
   height: 100%;
-  overflow: visible;
 }
 
-/* =========================================================
-   TITLE
-========================================================= */
+/* =========================================
+   HERO CONTENT
+========================================= */
 
-.hero-line {
+.hero-content {
+  position: absolute;
+  inset: var(--hud-h, 0px) 0 0;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  margin: 0 0 20px;
   font-family: 'Bitcount Grid Double', monospace;
-  font-weight: 600;
-  fill: url(#hero-fill);
-}
-
-.hero-line.is-sub {
-  fill: #cfe3ff;
+  font-size: clamp(11px, 1.4vw, 17px);
+  letter-spacing: 0.2em;
+  color: #cfe3ff;
 }
 
 .hero-title {
-  filter: drop-shadow(0 0 22px rgba(70, 140, 255, 0.35));
+  margin: 0;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: clamp(40px, 8vw, 112px);
+  font-weight: 600;
+  line-height: 1.15;
+  color: #eef5ff;
+  text-shadow:
+    0 0 18px rgba(70, 140, 255, 0.45),
+    0 0 42px rgba(63, 242, 255, 0.18);
 }
 
-.hero.is-live .hero-title {
-  animation: heroGlitch 7s steps(1) infinite;
+.hero-subtitle {
+  margin: 22px 0 0;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: clamp(10px, 1.2vw, 15px);
+  letter-spacing: 0.18em;
+  line-height: 1.8;
+  color: #a9c9f5;
 }
 
-@keyframes heroGlitch {
-  0%, 94%, 100% {
-    transform: none;
-    filter: drop-shadow(0 0 22px rgba(70, 140, 255, 0.35));
+/* =========================================
+   CIRCULAR REVOLVING TEXT
+========================================= */
+
+.hero-circular {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: clamp(190px, 27vw, 310px);
+  aspect-ratio: 1;
+
+  transform: translate(-50%, -50%);
+  z-index: -1;
+
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.hero-circular > * {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-circular .outerRing,
+.hero-circular .innerRing {
+  animation: heroCircularSpin 24s linear infinite;
+}
+
+@keyframes heroCircularSpin {
+  from {
+    transform: rotate(0deg);
   }
 
-  95% {
-    transform: translate(6px, -2px) skewX(-6deg);
-    filter:
-      drop-shadow(-4px 0 0 rgba(63, 242, 255, 0.7))
-      drop-shadow(4px 0 0 rgba(255, 60, 120, 0.5));
-  }
-
-  96.5% {
-    transform: translate(-4px, 1px);
-  }
-}
-
-/* =========================================================
-   FLIGHT
-========================================================= */
-
-.hero-seg {
-  fill: none;
-  stroke: none;
-}
-
-.hero-trail {
-  fill: none;
-  stroke: var(--cyan);
-  stroke-width: 5;
-  stroke-linecap: round;
-  opacity: 0.9;
-}
-
-.hero-trail.orbit {
-  stroke-width: 3;
-  stroke-dasharray: 2 0;
-}
-
-/* =========================================================
-   LOGO
-========================================================= */
-
-.hero-logo image {
-  filter: drop-shadow(0 0 18px rgba(63, 242, 255, 0.35));
-}
-
-.hero-ping {
-  fill: none;
-  stroke: var(--cyan);
-  stroke-width: 2;
-  opacity: 0;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: ping 3.2s ease-out infinite;
-}
-
-.hero-ping.delay {
-  animation-delay: 1.6s;
-}
-
-@keyframes ping {
-  0% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-
-  100% {
-    transform: scale(2.1);
-    opacity: 0;
-  }
-}
-
-.hero-orbit-ring {
-  fill: none;
-  stroke: var(--cyan);
-  stroke-width: 3;
-  stroke-dasharray: 4 14;
-  opacity: 0.45;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: orbitSpin 30s linear infinite;
-}
-
-@keyframes orbitSpin {
   to {
     transform: rotate(360deg);
   }
 }
 
-/* =========================================================
-   COUNTDOWN / SKIP
-========================================================= */
-
-.hero-countdown {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-family: 'Bitcount Grid Double', monospace;
-  font-weight: 600;
-  font-size: clamp(56px, 12vw, 160px);
-  letter-spacing: 2px;
-  color: var(--cyan);
-  text-shadow: 0 0 30px var(--cyan-soft);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.hero-skip {
-  position: absolute;
-  right: var(--gutter);
-  bottom: 32px;
-  z-index: 75;
-  padding: 8px 14px;
-  font-family: 'Bitcount Grid Double', monospace;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 1px;
-  color: var(--text-dim);
-  border: 1px solid var(--line);
-  background: rgba(6, 10, 22, 0.6);
-  animation: blink 1.4s steps(2) infinite;
-}
-
-.hero-skip:hover {
-  color: var(--cyan);
-  border-color: var(--cyan);
-}
-
-/* =========================================================
-   CTA
-========================================================= */
+/* =========================================
+   ENTER BUTTON
+========================================= */
 
 .hero-cta {
-  position: absolute;
-  left: 50%;
-  bottom: clamp(56px, 10vh, 110px);
-  translate: -50% 0;
   display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  width: max-content;
-  max-width: calc(100% - 32px);
+  margin-top: 34px;
+  pointer-events: auto;
 }
+
+.hero-cta .px-btn {
+  padding: 12px 28px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #cfe3ff;
+  background: rgba(6, 10, 22, 0.8);
+  border: 1px solid var(--cyan, #3ff2ff);
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    color 0.25s ease;
+}
+
+.hero-cta .px-btn:hover {
+  color: #fff;
+  background: rgba(45, 105, 255, 0.25);
+  box-shadow: 0 0 24px rgba(63, 242, 255, 0.2);
+}
+
+/* =========================================
+   SCROLL HINT
+========================================= */
 
 .hero-hint {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 22px;
+  bottom: 24px;
+  z-index: 3;
+
+  margin: 0;
   text-align: center;
+
   font-family: 'Bitcount Grid Double', monospace;
   font-size: 11px;
-  font-weight: 400;
   letter-spacing: 1px;
   line-height: 1.8;
-  color: var(--text-dim);
+  color: var(--text-dim, #a9b8d0);
 }
 
 .hero-hint > span:first-child {
   display: inline-block;
-  color: var(--cyan);
-  animation: bounce 1.4s ease-in-out infinite;
+  margin-left: 8px;
+  color: var(--cyan, #3ff2ff);
+  animation: heroBounce 1.4s ease-in-out infinite;
 }
 
-@keyframes bounce {
+@keyframes heroBounce {
   50% {
     transform: translateY(4px);
   }
 }
 
-/* =========================================================
+/* =========================================
    RESPONSIVE
-========================================================= */
+========================================= */
 
 @media (max-width: 760px) {
-  .hero-cta {
-    bottom: 120px;
-    gap: 10px;
-    flex-wrap: nowrap;
+  .hero {
+    min-height: 520px;
   }
 
-  .hero-cta .px-btn {
-    font-size: 12px;
-    letter-spacing: 0.5px;
-    padding: 12px 14px;
+  .hero-title {
+    font-size: clamp(36px, 10vw, 68px);
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+  }
+
+  .hero-subtitle {
+    max-width: 280px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-circular {
+    width: 190px;
   }
 
   .hero-hint {
-    bottom: 92px;
-    font-size: 10px;
-    letter-spacing: 0.5px;
+    bottom: 20px;
+    font-size: 9px;
   }
 
   .hero-hint-keys {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-circular .outerRing,
+  .hero-circular .innerRing,
+  .hero-hint > span:first-child {
+    animation: none;
   }
 }
