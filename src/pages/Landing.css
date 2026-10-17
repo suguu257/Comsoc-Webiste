@@ -1,0 +1,87 @@
+.landing {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: #030712;
+}
+
+.landing-content {
+  position: relative;
+  min-height: 100svh;
+}
+
+.landing-hyperspeed {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.landing-hero-content {
+  position: relative;
+  z-index: 2;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: #f5f8ff;
+}
+
+.landing-eyebrow,
+.landing-subtitle {
+  font-family: "Bitcount Grid Double", monospace;
+  letter-spacing: 0.16em;
+  color: #c7dfff;
+}
+
+.landing-hero-content h1 {
+  margin: 18px 0;
+  font-family: "Bitcount Grid Double", monospace;
+  font-size: clamp(42px, 8vw, 112px);
+  text-shadow: 0 0 30px rgba(63, 140, 255, 0.5);
+}
+
+.landing-circular-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 240px;
+  height: 240px;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.landing-circular {
+  animation: landingRotate 30s linear infinite;
+}
+
+@keyframes landingRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.landing-enter {
+  margin-top: 28px;
+  padding: 12px 28px;
+  color: #c7dfff;
+  background: rgba(3, 7, 18, 0.75);
+  border: 1px solid #4f8bff;
+  cursor: pointer;
+  letter-spacing: 0.15em;
+}
+
+.landing-enter:hover {
+  background: #16346b;
+}
+
+@media (max-width: 600px) {
+  .landing-circular-text {
+    width: 190px;
+    height: 190px;
+  }
+}
