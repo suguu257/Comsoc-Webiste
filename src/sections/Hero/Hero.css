@@ -33,6 +33,12 @@
   paint-order: stroke fill;
 }
 
+/* Typewriter cursor */
+.hero-cursor {
+  fill: var(--cyan);
+  animation: blink 0.8s steps(2) infinite;
+}
+
 .hero-depth-1 {
   fill: #2f5fe0;
 }
@@ -54,7 +60,7 @@
 }
 
 .hero-title {
-  filter: drop-shadow(0 0 18px rgba(63, 242, 255, 0.45)) drop-shadow(0 0 48px rgba(47, 107, 255, 0.35));
+  filter: drop-shadow(0 0 8px rgba(63, 242, 255, 0.22));
 }
 
 /* Old-movie flicker: mostly steady, with the odd dip, flash and gate-weave */
@@ -191,21 +197,8 @@
 }
 
 /* =========================================================
-   CTA
+   HINT
 ========================================================= */
-
-.hero-cta {
-  position: absolute;
-  left: 50%;
-  bottom: clamp(56px, 10vh, 110px);
-  translate: -50% 0;
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: max-content;
-  max-width: calc(100% - 32px);
-}
 
 .hero-hint {
   position: absolute;
@@ -230,18 +223,6 @@
 }
 
 @media (max-width: 760px) {
-  .hero-cta {
-    bottom: 120px;
-    gap: 10px;
-    flex-wrap: nowrap;
-  }
-
-  .hero-cta .px-btn {
-    font-size: 13px;
-    letter-spacing: 1px;
-    padding: 12px 14px;
-  }
-
   .hero-hint {
     bottom: 92px;
     font-size: 10px;

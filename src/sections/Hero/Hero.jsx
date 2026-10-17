@@ -2,17 +2,17 @@ import "./Hero.css";
 import { useMemo, useRef, useState, useEffect } from "react";
 import { gsap, useGSAP, reducedMotion } from "../../lib/gsap";
 import { ui } from "../../lib/uiStore";
-import { lockScroll, scrollToSection } from "../../lib/scroll";
+import { lockScroll } from "../../lib/scroll";
 import { dockTarget, rocketEl, setThrust } from "../../lib/rocket";
 import { unlock, visitSector } from "../../game/gameStore";
 import { sfx } from "../../game/sound";
-import { JOIN_URL, LOGO_SRC } from "../../data/content";
+import { LOGO_SRC } from "../../data/content";
 import SignalFragment from "../../components/SignalFragment/SignalFragment";
 
 /* =========================================================
    LAYOUTS (SVG user units)
-   Each title line is swept by the rocket; the sweep path
-   doubles as that line's reveal mask.
+   The title types itself out while the rocket launches,
+   orbits the logo once and docks into the nav rail.
 ========================================================= */
 
 const LAYOUTS = {
@@ -39,72 +39,32 @@ const LAYOUTS = {
   },
 };
 
-const SPEED = 1450; // user units per second while flying
-const PAD = 40;
-const TURN = 130;
-const CAP = 0.875; // Press Start 2P glyph height in em
+const SPEED = 1100; // user units per second while flying
 const EXTRUDE = 10; // depth of the pixel drop-shadow
+const TYPE_STEP = 0.075; // seconds per character
+const LINE_PAUSE = 0.25;
 
 const pickLayout = () =>
   window.innerWidth / window.innerHeight < 0.9 ? "tall" : "wide";
 
-/* Build the flight plan: launch → sweeps & turns → orbit */
-function buildFlight({ W, H, lines, logo, orbit }) {
-  const segs = [];
-
-  const rows = lines.map((line, i) => {
-    const dir = i % 2 === 0 ? 1 : -1;
-    const left = line.x - line.length / 2 - PAD;
-    const right = line.x + line.length / 2 + PAD;
-    return {
-      yc: line.y - (line.size * CAP) / 2 + EXTRUDE / 2,
-      dir,
-      start: dir > 0 ? left : right,
-      end: dir > 0 ? right : left,
-    };
-  });
-
-  const first = rows[0];
-  segs.push({
-    kind: "launch",
-    d: `M${W / 2},${H + 110} C${W / 2},${H * 0.6} ${first.start - 140},${first.yc + 260} ${first.start - 110},${first.yc + 80} C${first.start - 95},${first.yc} ${first.start - 60},${first.yc} ${first.start},${first.yc}`,
-  });
-
-  rows.forEach((row, i) => {
-    segs.push({ kind: "sweep", line: i, d: `M${row.start},${row.yc} L${row.end},${row.yc}` });
-
-    const next = rows[i + 1];
-    if (next) {
-      segs.push({
-        kind: "turn",
-        d: `M${row.end},${row.yc} C${row.end + row.dir * TURN},${row.yc} ${next.start + row.dir * TURN},${next.yc} ${next.start},${next.yc}`,
-      });
-    }
-  });
-
-  /* Enter the orbit on the side the last sweep finished on */
-  const last = rows[rows.length - 1];
-  const side = last.dir < 0 ? -1 : 1;
-  const sweep = side < 0 ? 0 : 1;
-  const R = orbit;
+/* Flight plan: lift off from the bottom, one clockwise orbit of the logo */
+function buildFlight({ W, H, logo, orbit: R }) {
   const L = { x: logo.x - R, y: logo.y };
-  const Rt = { x: logo.x + R, y: logo.y };
   const T = { x: logo.x, y: logo.y - R };
+  const Rt = { x: logo.x + R, y: logo.y };
   const B = { x: logo.x, y: logo.y + R };
-  const entry = side < 0 ? L : Rt;
-  const opposite = side < 0 ? Rt : L;
-  const arc = (p) => `A${R},${R} 0 0 ${sweep} ${p.x},${p.y}`;
+  const arc = (p) => `A${R},${R} 0 0 1 ${p.x},${p.y}`;
 
-  segs.push({
-    kind: "approach",
-    d: `M${last.end},${last.yc} C${last.end + last.dir * TURN},${last.yc} ${entry.x},${entry.y - TURN * 1.2} ${entry.x},${entry.y}`,
-  });
-  segs.push({
-    kind: "orbit",
-    d: `M${entry.x},${entry.y} ${arc(B)} ${arc(opposite)} ${arc(T)} ${arc(entry)} ${arc(B)}`,
-  });
-
-  return segs;
+  return [
+    {
+      kind: "launch",
+      d: `M${W / 2},${H + 110} C${W / 2},${H * 0.88} ${L.x},${L.y + R * 1.3} ${L.x},${L.y}`,
+    },
+    {
+      kind: "orbit",
+      d: `M${L.x},${L.y} ${arc(T)} ${arc(Rt)} ${arc(B)} ${arc(L)} ${arc(T)}`,
+    },
+  ];
 }
 
 /* =========================================================
@@ -130,26 +90,17 @@ export default function Hero() {
   }, []);
 
   /* -------------------------------------------------------
-     LAUNCH SEQUENCE
+     INTRO: typewriter title + launch, orbit, dock
   ------------------------------------------------------- */
   useGSAP(
     (context, contextSafe) => {
       const root = rootRef.current;
       const rocket = rocketEl();
       const q = gsap.utils.selector(root);
+      const cursor = q(".hero-cursor")[0];
       let finished = false;
 
       lockScroll(true);
-
-      const revealUi = (instant) => {
-        gsap.to(q(".hero-cta > *, .hero-hint"), {
-          autoAlpha: 1,
-          y: 0,
-          stagger: instant ? 0 : 0.12,
-          duration: instant ? 0.3 : 0.7,
-          ease: "power3.out",
-        });
-      };
 
       const complete = (instant) => {
         if (finished) return;
@@ -157,14 +108,15 @@ export default function Hero() {
         tl.kill();
 
         if (instant) {
-          gsap.set(q(".hero-mask"), { drawSVG: "100%" });
+          gsap.set(q(".hero-char"), { opacity: 1 });
           gsap.set(q(".hero-logo"), { autoAlpha: 1, scale: 1 });
           const target = dockTarget(0);
           if (target) gsap.set(rocket, { ...target, opacity: 1 });
         }
 
+        gsap.to(cursor, { autoAlpha: 0, duration: 0.3 });
+        gsap.to(q(".hero-hint"), { autoAlpha: 1, y: 0, duration: instant ? 0.3 : 0.7, ease: "power3.out" });
         setThrust(0.35);
-        revealUi(instant);
         ui.set({ introDone: true });
         lockScroll(false);
         visitSector("home");
@@ -179,8 +131,8 @@ export default function Hero() {
           .timeline({ onComplete: () => complete(false) })
           .to(rocket, {
             motionPath: {
-              path: [from, { x: target.x - 160, y: (from.y + target.y) / 2 }, { x: target.x, y: target.y }],
-              curviness: 1.3,
+              path: [from, { x: (from.x + target.x) / 2, y: Math.min(from.y, target.y) - 40 }, { x: target.x, y: target.y }],
+              curviness: 1.2,
               autoRotate: 90,
             },
             duration: 1.4,
@@ -189,14 +141,26 @@ export default function Hero() {
           .to(rocket, { rotation: target.rotation, scale: target.scale, duration: 0.5, ease: "back.out(2.2)" });
       };
 
-      const tl = gsap.timeline({ paused: true });
+      /* Puts the cursor right after character `index` of a line's face text */
+      const moveCursor = (lineIndex, charIndex) => {
+        const face = q(`.hero-line[data-line="${lineIndex}"] .hero-face`)[0];
+        if (!face || !cursor) return;
+        const size = Number(face.getAttribute("font-size"));
+        const end = face.getEndPositionOfChar(charIndex);
+        cursor.setAttribute("x", end.x + size * 0.12);
+        cursor.setAttribute("y", end.y - size * 0.875);
+        cursor.setAttribute("width", size * 0.5);
+        cursor.setAttribute("height", size * 0.875);
+      };
 
+      const tl = gsap.timeline({ paused: true });
       skipRef.current = contextSafe(() => complete(true));
 
       /* Starting state */
-      gsap.set(q(".hero-mask, .hero-trail"), { drawSVG: "0%" });
+      gsap.set(q(".hero-char"), { opacity: 0 });
       gsap.set(q(".hero-logo"), { autoAlpha: 0, scale: 0.4, transformOrigin: "50% 50%" });
-      gsap.set(q(".hero-cta > *, .hero-hint"), { autoAlpha: 0, y: 20 });
+      gsap.set(q(".hero-hint"), { autoAlpha: 0, y: 20 });
+      gsap.set(cursor, { autoAlpha: 0 });
       gsap.set(rocket, { opacity: 0, scale: 1, rotation: 0 });
 
       if (reducedMotion()) {
@@ -204,59 +168,59 @@ export default function Hero() {
         return;
       }
 
-      /* Ignition: rumble, then lift off */
+      /* Typewriter: one character at a time, cursor leading */
+      let t = 0.2;
+      tl.set(cursor, { autoAlpha: 1 }, t);
+      layout.lines.forEach((line, lineIndex) => {
+        [...line.text].forEach((ch, charIndex) => {
+          tl.call(() => {
+            gsap.set(q(`.hero-line[data-line="${lineIndex}"] .hero-char[data-c="${charIndex}"]`), { opacity: 1 });
+            moveCursor(lineIndex, charIndex);
+            if (ch !== " ") sfx("type");
+          }, null, t);
+          t += TYPE_STEP;
+        });
+        t += LINE_PAUSE;
+      });
+
+      /* Launch alongside the typing: ignition, lift-off, one orbit */
+      const launchAt = 0.5;
       tl.call(() => {
         setThrust(1);
         sfx("launch");
-      }, null, 0);
-      tl.fromTo(q(".hero-stage"), { x: -3 }, { x: 3, duration: 0.05, repeat: 9, yoyo: true, clearProps: "x" }, 0);
-      tl.set(rocket, { opacity: 1 }, 0.4);
+      }, null, launchAt);
+      tl.set(rocket, { opacity: 1 }, launchAt);
 
-      /* Fly each segment at constant speed */
       const paths = q(".hero-seg");
-      let t = 0.4;
-
+      let ft = launchAt;
       flight.forEach((seg, i) => {
         const path = paths[i];
         const len = path.getTotalLength();
         /* power1.in ends at 2x average speed, so give the launch twice the time */
-        const duration =
-          seg.kind === "launch" ? (2 * len) / SPEED : seg.kind === "orbit" ? len / (SPEED * 0.7) : len / SPEED;
+        const duration = seg.kind === "launch" ? (2 * len) / SPEED : len / SPEED;
         const ease = seg.kind === "launch" ? "power1.in" : "none";
 
-        tl.to(rocket, {
-          motionPath: { path, align: path, alignOrigin: [0.5, 0.5], autoRotate: 90 },
-          duration,
-          ease,
-        }, t);
+        tl.to(rocket, { motionPath: { path, align: path, alignOrigin: [0.5, 0.5], autoRotate: 90 }, duration, ease }, ft);
+        tl.to(q(`.hero-trail[data-seg="${i}"]`), { drawSVG: "100%", duration, ease }, ft);
 
-        tl.to(q(`.hero-trail[data-seg="${i}"]`), { drawSVG: "100%", duration, ease }, t);
-
-        if (seg.kind === "sweep") {
-          tl.to(q(`.hero-mask[data-line="${seg.line}"]`), { drawSVG: "100%", duration, ease }, t);
-          /* The trail cools down once its line is written */
-          tl.to(q(`.hero-trail[data-seg="${i}"]`), { opacity: 0, duration: 1.6 }, t + duration + 0.2);
+        if (seg.kind === "launch") {
+          tl.to(q(".hero-logo"), { autoAlpha: 1, scale: 1, duration: 0.9, ease: "back.out(1.8)" }, ft + duration * 0.5);
+          tl.to(q(`.hero-trail[data-seg="${i}"]`), { opacity: 0, duration: 1.2 }, ft + duration + 0.1);
         }
 
-        if (seg.kind !== "orbit" && seg.kind !== "sweep") {
-          tl.to(q(`.hero-trail[data-seg="${i}"]`), { opacity: 0, duration: 1.2 }, t + duration + 0.1);
-        }
-
-        if (seg.kind === "approach") {
-          tl.to(q(".hero-logo"), { autoAlpha: 1, scale: 1, duration: 0.9, ease: "back.out(1.8)" }, t);
-        }
-
-        t += duration;
+        ft += duration;
       });
 
-      /* Dock as soon as the orbit closes; trail fades finish on their own */
+      gsap.set(q(".hero-trail"), { drawSVG: "0%" });
+
+      /* Dock once the orbit closes and the title is fully typed */
       tl.call(() => {
         if (finished) return;
         unlock("liftoff");
         dock();
-      }, null, t);
+      }, null, Math.max(ft, t));
 
-      /* Launch once the loader has cleared */
+      /* Start once the loader has cleared */
       const go = () => {
         if (!finished && ui.get().loaded && tl.paused()) tl.play();
       };
@@ -295,6 +259,14 @@ export default function Hero() {
 
   const { W, H, lines, logo, orbit } = layout;
 
+  /* Each character is its own tspan so the typewriter can reveal it */
+  const chars = (text) =>
+    [...text].map((ch, i) => (
+      <tspan key={i} className="hero-char" data-c={i}>
+        {ch}
+      </tspan>
+    ));
+
   return (
     <section id="home" className={`hero ${introDone ? "is-live" : ""}`} ref={rootRef}>
       <div className="hero-stage">
@@ -328,16 +300,6 @@ export default function Hero() {
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-
-            {!introDone &&
-              lines.map((line, i) => {
-                const seg = flight.find((s) => s.kind === "sweep" && s.line === i);
-                return (
-                  <mask key={i} id={`hero-mask-${i}`} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
-                    <path className="hero-mask" data-line={i} d={seg.d} stroke="#fff" strokeWidth={line.size * CAP + 50} fill="none" />
-                  </mask>
-                );
-              })}
           </defs>
 
           {/* Logo + orbit */}
@@ -351,7 +313,6 @@ export default function Hero() {
           {/* Title */}
           <g className="hero-title">
             {lines.map((line, i) => {
-              const sub = line.size < 80;
               const text = {
                 x: line.x,
                 y: line.y,
@@ -361,24 +322,21 @@ export default function Hero() {
                 textAnchor: "middle",
               };
               return (
-                <g
-                  key={line.text}
-                  className={`hero-line ${sub ? "is-sub" : ""}`}
-                  mask={introDone ? undefined : `url(#hero-mask-${i})`}
-                >
+                <g key={`${layoutKey}-${line.text}`} className={`hero-line ${line.size < 80 ? "is-sub" : ""}`} data-line={i}>
                   {/* Pixel extrusion: two hard offset copies under the face */}
                   <text {...text} className="hero-depth-2" transform={`translate(${EXTRUDE} ${EXTRUDE})`} aria-hidden="true">
-                    {line.text}
+                    {chars(line.text)}
                   </text>
                   <text {...text} className="hero-depth-1" transform={`translate(${EXTRUDE / 2} ${EXTRUDE / 2})`} aria-hidden="true">
-                    {line.text}
+                    {chars(line.text)}
                   </text>
                   <text {...text} className="hero-face">
-                    {line.text}
+                    {chars(line.text)}
                   </text>
                 </g>
               );
             })}
+            <rect className="hero-cursor" />
           </g>
 
           {/* Flight path + glowing trail */}
@@ -392,22 +350,6 @@ export default function Hero() {
         </svg>
 
         <div className="hero-film" aria-hidden="true" />
-
-      </div>
-
-      <div className="hero-cta">
-        <a className="px-btn" href={JOIN_URL} onClick={(e) => {
-          if (JOIN_URL.startsWith("#")) {
-            e.preventDefault();
-            scrollToSection(JOIN_URL.slice(1));
-          }
-          sfx("select");
-        }}>
-          ▶ JOIN COMSOC
-        </a>
-        <button className="px-btn ghost" onClick={() => { scrollToSection("events"); sfx("select"); }}>
-          EXPLORE EVENTS
-        </button>
       </div>
 
       <p className="hero-hint">
