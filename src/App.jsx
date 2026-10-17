@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+
+import { useEffect, useState, useCallback } from "react";
 import { ScrollTrigger } from "./lib/gsap";
 import { initScroll } from "./lib/scroll";
 
@@ -8,6 +9,8 @@ import HUD from "./components/HUD/HUD";
 import NavRail from "./components/NavRail/NavRail";
 import Rocket from "./components/Rocket/Rocket";
 import ModalHost from "./components/ModalHost/ModalHost";
+
+import IntroSequence from "./components/IntroSequence/IntroSequence";
 
 import Hero from "./sections/Hero/Hero";
 import Story from "./sections/Story/Story";
@@ -20,36 +23,56 @@ import GameSystems from "./game/GameSystems";
 import PanelHost from "./game/PanelHost";
 import Toasts from "./game/Toasts/Toasts";
 
+import "./App.css";
+
 export default function App() {
+  const [introComplete, setIntroComplete] = useState(false);
+
+  const handleIntroComplete = useCallback(() => {
+    setIntroComplete(true);
+  }, []);
+
   useEffect(() => {
     const destroy = initScroll();
+
     document.fonts.ready.then(() => ScrollTrigger.refresh());
+
     return destroy;
   }, []);
 
   return (
     <>
-      <Starfield />
+      {!introComplete && (
+        <IntroSequence onComplete={handleIntroComplete} />
+      )}
 
-      {/* NavRail registers the rocket dock before the hero mounts */}
-      <NavRail />
-      <Rocket />
-      <HUD />
+      <div
+        className={`site-experience ${
+          introComplete ? "is-visible" : ""
+        }`}
+        aria-hidden={!introComplete}
+      >
+        <Starfield />
 
-      <main className="site">
-        <Hero />
-        <Story />
-        <Events />
-        <Board />
-        <Gallery />
-        <Contact />
-      </main>
+        <NavRail />
+        <Rocket />
+        <HUD />
 
-      <Toasts />
-      <ModalHost />
-      <PanelHost />
-      <GameSystems />
-      <Cursor />
+        <main className="site">
+          <Hero />
+          <Story />
+          <Events />
+          <Board />
+          <Gallery />
+          <Contact />
+        </main>
+
+        <Toasts />
+        <ModalHost />
+        <PanelHost />
+        <GameSystems />
+        <Cursor />
+      </div>
     </>
   );
 }
