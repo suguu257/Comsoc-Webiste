@@ -20,8 +20,8 @@ const LAYOUTS = {
     W: 1600,
     H: 900,
     lines: [
-      { text: "IEEE COMSOC", x: 800, y: 235, size: 150, length: 1180 },
-      { text: "VIT VELLORE", x: 800, y: 345, size: 66, length: 860 },
+      { text: "IEEE COMSOC", x: 800, y: 245, size: 100, length: 1150 },
+      { text: "VIT VELLORE", x: 800, y: 340, size: 46, length: 860 },
     ],
     logo: { x: 800, y: 565, r: 88 },
     orbit: 145,
@@ -30,9 +30,9 @@ const LAYOUTS = {
     W: 900,
     H: 1500,
     lines: [
-      { text: "IEEE", x: 450, y: 360, size: 170, length: 560 },
-      { text: "COMSOC", x: 450, y: 550, size: 150, length: 780 },
-      { text: "VIT VELLORE", x: 450, y: 670, size: 62, length: 720 },
+      { text: "IEEE", x: 450, y: 360, size: 150, length: 640 },
+      { text: "COMSOC", x: 450, y: 530, size: 118, length: 760 },
+      { text: "VIT VELLORE", x: 450, y: 640, size: 50, length: 720 },
     ],
     logo: { x: 450, y: 930, r: 110 },
     orbit: 185,
@@ -42,6 +42,8 @@ const LAYOUTS = {
 const SPEED = 1450; // user units per second while flying
 const PAD = 40;
 const TURN = 130;
+const CAP = 0.875; // Press Start 2P glyph height in em
+const EXTRUDE = 10; // depth of the pixel drop-shadow
 
 const pickLayout = () =>
   window.innerWidth / window.innerHeight < 0.9 ? "tall" : "wide";
@@ -55,7 +57,7 @@ function buildFlight({ W, H, lines, logo, orbit }) {
     const left = line.x - line.length / 2 - PAD;
     const right = line.x + line.length / 2 + PAD;
     return {
-      yc: line.y - line.size * 0.36,
+      yc: line.y - (line.size * CAP) / 2 + EXTRUDE / 2,
       dir,
       start: dir > 0 ? left : right,
       end: dir > 0 ? right : left,
@@ -157,7 +159,6 @@ export default function Hero() {
         if (instant) {
           gsap.set(q(".hero-mask"), { drawSVG: "100%" });
           gsap.set(q(".hero-logo"), { autoAlpha: 1, scale: 1 });
-          gsap.set(q(".hero-countdown"), { autoAlpha: 0 });
           const target = dockTarget(0);
           if (target) gsap.set(rocket, { ...target, opacity: 1 });
         }
@@ -203,23 +204,17 @@ export default function Hero() {
         return;
       }
 
-      /* Countdown T-3 … LIFTOFF */
-      ["3", "2", "1", "LIFTOFF"].forEach((label, i) => {
-        tl.call(() => {
-          const el = q(".hero-countdown")[0];
-          if (el) el.textContent = label;
-          sfx(i < 3 ? "select" : "launch");
-        }, null, i * 0.45);
-        tl.fromTo(q(".hero-countdown"), { autoAlpha: 1, scale: 1.6 }, { scale: 1, duration: 0.4, ease: "power3.out" }, i * 0.45);
-      });
-      tl.to(q(".hero-countdown"), { autoAlpha: 0, duration: 0.3 }, 1.65);
-      tl.fromTo(q(".hero-stage"), { x: -3 }, { x: 3, duration: 0.05, repeat: 11, yoyo: true, clearProps: "x" }, 1.35);
-      tl.call(() => setThrust(1), null, 1.35);
-      tl.set(rocket, { opacity: 1 }, 1.5);
+      /* Ignition: rumble, then lift off */
+      tl.call(() => {
+        setThrust(1);
+        sfx("launch");
+      }, null, 0);
+      tl.fromTo(q(".hero-stage"), { x: -3 }, { x: 3, duration: 0.05, repeat: 9, yoyo: true, clearProps: "x" }, 0);
+      tl.set(rocket, { opacity: 1 }, 0.4);
 
       /* Fly each segment at constant speed */
       const paths = q(".hero-seg");
-      let t = 1.5;
+      let t = 0.4;
 
       flight.forEach((seg, i) => {
         const path = paths[i];
@@ -261,7 +256,12 @@ export default function Hero() {
         dock();
       }, null, t);
 
-      document.fonts.ready.then(() => !finished && tl.play());
+      /* Launch once the loader has cleared */
+      const go = () => {
+        if (!finished && ui.get().loaded && tl.paused()) tl.play();
+      };
+      const unsubscribe = ui.subscribe(go);
+      go();
 
       const onKey = (e) => {
         if (["Escape", "Enter", " "].includes(e.key)) skipRef.current();
@@ -270,8 +270,9 @@ export default function Hero() {
 
       return () => {
         window.removeEventListener("keydown", onKey);
+        unsubscribe();
         if (!finished) lockScroll(false);
-        finished = true; // stops a pending fonts.ready from replaying a reverted timeline
+        finished = true;
       };
     },
     { scope: rootRef }
@@ -307,11 +308,17 @@ export default function Hero() {
           <title id="hero-title">IEEE ComSoc VIT Vellore</title>
 
           <defs>
-            <linearGradient id="hero-fill" x1="0" x2="1" y1="0" y2="0">
-              <stop offset="0" stopColor="#2d69ff" />
-              <stop offset="0.3" stopColor="#609cff" />
-              <stop offset="0.65" stopColor="#dce6f7" />
-              <stop offset="1" stopColor="#9aa4b6" />
+            {/* Arcade-logo fills: top-lit, with a hard horizon line */}
+            <linearGradient id="hero-fill" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stopColor="#ffffff" />
+              <stop offset="0.42" stopColor="#b9f7ff" />
+              <stop offset="0.5" stopColor="#3ff2ff" />
+              <stop offset="1" stopColor="#2f6bff" />
+            </linearGradient>
+            <linearGradient id="hero-fill-sub" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stopColor="#fff6d6" />
+              <stop offset="0.5" stopColor="#ffd166" />
+              <stop offset="1" stopColor="#ff9f1c" />
             </linearGradient>
 
             <filter id="hero-glow" x="-20%" y="-20%" width="140%" height="140%">
@@ -327,7 +334,7 @@ export default function Hero() {
                 const seg = flight.find((s) => s.kind === "sweep" && s.line === i);
                 return (
                   <mask key={i} id={`hero-mask-${i}`} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
-                    <path className="hero-mask" data-line={i} d={seg.d} stroke="#fff" strokeWidth={line.size * 1.05} fill="none" />
+                    <path className="hero-mask" data-line={i} d={seg.d} stroke="#fff" strokeWidth={line.size * CAP + 50} fill="none" />
                   </mask>
                 );
               })}
@@ -343,21 +350,35 @@ export default function Hero() {
 
           {/* Title */}
           <g className="hero-title">
-            {lines.map((line, i) => (
-              <text
-                key={line.text}
-                className={`hero-line ${line.size < 100 ? "is-sub" : ""}`}
-                x={line.x}
-                y={line.y}
-                fontSize={line.size}
-                textLength={line.length}
-                lengthAdjust="spacing"
-                textAnchor="middle"
-                mask={introDone ? undefined : `url(#hero-mask-${i})`}
-              >
-                {line.text}
-              </text>
-            ))}
+            {lines.map((line, i) => {
+              const sub = line.size < 80;
+              const text = {
+                x: line.x,
+                y: line.y,
+                fontSize: line.size,
+                textLength: line.length,
+                lengthAdjust: "spacing",
+                textAnchor: "middle",
+              };
+              return (
+                <g
+                  key={line.text}
+                  className={`hero-line ${sub ? "is-sub" : ""}`}
+                  mask={introDone ? undefined : `url(#hero-mask-${i})`}
+                >
+                  {/* Pixel extrusion: two hard offset copies under the face */}
+                  <text {...text} className="hero-depth-2" transform={`translate(${EXTRUDE} ${EXTRUDE})`} aria-hidden="true">
+                    {line.text}
+                  </text>
+                  <text {...text} className="hero-depth-1" transform={`translate(${EXTRUDE / 2} ${EXTRUDE / 2})`} aria-hidden="true">
+                    {line.text}
+                  </text>
+                  <text {...text} className="hero-face">
+                    {line.text}
+                  </text>
+                </g>
+              );
+            })}
           </g>
 
           {/* Flight path + glowing trail */}
@@ -370,7 +391,8 @@ export default function Hero() {
             ))}
         </svg>
 
-        <div className="hero-countdown" aria-hidden="true" />
+        <div className="hero-film" aria-hidden="true" />
+
       </div>
 
       <div className="hero-cta">

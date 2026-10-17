@@ -8,6 +8,7 @@ import HUD from "./components/HUD/HUD";
 import NavRail from "./components/NavRail/NavRail";
 import Rocket from "./components/Rocket/Rocket";
 import ModalHost from "./components/ModalHost/ModalHost";
+import Loader from "./components/Loader/Loader";
 
 import Hero from "./sections/Hero/Hero";
 import Story from "./sections/Story/Story";
@@ -45,6 +46,7 @@ export default function App() {
         <Contact />
       </main>
 
+      <Loader />
       <Toasts />
       <ModalHost />
       <PanelHost />

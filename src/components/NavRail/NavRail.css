@@ -13,8 +13,12 @@
   align-items: flex-end;
   gap: clamp(26px, 6vh, 52px);
   transform: translateY(-50%);
-  opacity: 0.35;
+  opacity: 0;
   transition: opacity 0.8s;
+}
+
+.rail.is-ready {
+  opacity: 0.35;
 }
 
 .rail.is-live {
