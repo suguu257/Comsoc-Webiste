@@ -2,6 +2,7 @@ import { createStore } from "./createStore";
 
 /* Session-only UI state (never persisted) */
 export const ui = createStore({
+  loaded: false, // loader finished; the launch may begin
   introDone: false,
   active: 0,
   panel: null, // "achievements" | "terminal" | "arcade" | "warp" | null

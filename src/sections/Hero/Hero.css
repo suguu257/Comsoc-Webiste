@@ -1,265 +1,234 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap');
-
-/* =========================================
-   HERO CONTAINER
-========================================= */
-
 .hero {
   position: relative;
-  width: 100%;
   height: 100vh;
   height: 100svh;
   min-height: 560px;
   overflow: hidden;
-  isolation: isolate;
-  background: #030712;
 }
 
-/* =========================================
-   HYPERSPEED BACKGROUND
-========================================= */
-
-.hero-hyperspeed {
+.hero-stage {
   position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
+  inset: var(--hud-h) 0 0;
+  will-change: transform;
 }
 
-.hero-hyperspeed canvas {
-  display: block;
+.hero-svg {
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 
-/* =========================================
-   HERO CONTENT
-========================================= */
+/* =========================================================
+   TITLE
+========================================================= */
 
-.hero-content {
-  position: absolute;
-  inset: var(--hud-h, 0px) 0 0;
-  z-index: 2;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  padding: 24px;
-  text-align: center;
-  pointer-events: none;
+.hero-line text {
+  font-family: "Press Start 2P", var(--font-pixel);
 }
 
-.hero-eyebrow {
-  margin: 0 0 20px;
-  font-family: 'Bitcount Grid Double', monospace;
-  font-size: clamp(11px, 1.4vw, 17px);
-  letter-spacing: 0.2em;
-  color: #cfe3ff;
+.hero-face {
+  fill: url(#hero-fill);
+  stroke: #020306;
+  stroke-width: 2px;
+  paint-order: stroke fill;
+}
+
+/* Typewriter cursor */
+.hero-cursor {
+  fill: var(--cyan);
+  animation: blink 0.8s steps(2) infinite;
+}
+
+.hero-depth-1 {
+  fill: #2f5fe0;
+}
+
+.hero-depth-2 {
+  fill: #0a1440;
+}
+
+.hero-line.is-sub .hero-face {
+  fill: url(#hero-fill-sub);
+}
+
+.hero-line.is-sub .hero-depth-1 {
+  fill: #c0610a;
+}
+
+.hero-line.is-sub .hero-depth-2 {
+  fill: #2a1300;
 }
 
 .hero-title {
-  margin: 0;
-  font-family: 'Bitcount Grid Double', monospace;
-  font-size: clamp(40px, 8vw, 112px);
-  font-weight: 600;
-  line-height: 1.15;
-  color: #eef5ff;
-  text-shadow:
-    0 0 18px rgba(70, 140, 255, 0.45),
-    0 0 42px rgba(63, 242, 255, 0.18);
+  filter: drop-shadow(0 0 8px rgba(63, 242, 255, 0.22));
 }
 
-.hero-subtitle {
-  margin: 22px 0 0;
-  font-family: 'Bitcount Grid Double', monospace;
-  font-size: clamp(10px, 1.2vw, 15px);
-  letter-spacing: 0.18em;
-  line-height: 1.8;
-  color: #a9c9f5;
+/* Old-movie flicker: mostly steady, with the odd dip, flash and gate-weave */
+.hero.is-live .hero-title {
+  animation: heroFilm 7s steps(1) infinite;
 }
 
-/* =========================================
-   CIRCULAR REVOLVING TEXT
-========================================= */
+/* Opacity + gate weave only, so the glow filter stays on */
+@keyframes heroFilm {
+  0%, 100% { opacity: 1; transform: none; }
+  11% { opacity: 0.45; }
+  12% { opacity: 1; }
+  12.6% { opacity: 0.7; }
+  13.2% { opacity: 1; }
+  38% { transform: translate(2px, -1px); }
+  39% { transform: none; }
+  64% { opacity: 0.2; }
+  64.8% { opacity: 1; transform: translate(-3px, 2px); }
+  66% { transform: none; }
+  88% { opacity: 0.8; }
+  89% { opacity: 1; }
+}
 
-.hero-circular {
+/* Grain + scratches over the title while it plays */
+.hero-film {
   position: absolute;
-  top: 50%;
-  left: 50%;
-
-  width: clamp(190px, 27vw, 310px);
-  aspect-ratio: 1;
-
-  transform: translate(-50%, -50%);
-  z-index: -1;
-
-  opacity: 0.75;
+  inset: 0;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s;
+  background:
+    linear-gradient(90deg, transparent 31%, rgba(255, 255, 255, 0.07) 31.1%, transparent 31.25%),
+    linear-gradient(90deg, transparent 72%, rgba(255, 255, 255, 0.05) 72.1%, transparent 72.2%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.5'/></svg>");
+  mix-blend-mode: screen;
+  animation: filmJitter 0.5s steps(3) infinite;
 }
 
-.hero-circular > * {
-  width: 100%;
-  height: 100%;
+.hero.is-live .hero-film {
+  opacity: 0.18;
 }
 
-.hero-circular .outerRing,
-.hero-circular .innerRing {
-  animation: heroCircularSpin 24s linear infinite;
+@keyframes filmJitter {
+  33% { background-position: 4% 0, -6% 0, 30px 20px; }
+  66% { background-position: -3% 0, 3% 0, -20px 40px; }
 }
 
-@keyframes heroCircularSpin {
-  from {
-    transform: rotate(0deg);
-  }
+/* =========================================================
+   FLIGHT
+========================================================= */
 
-  to {
-    transform: rotate(360deg);
-  }
+.hero-seg {
+  fill: none;
+  stroke: none;
 }
 
-/* =========================================
-   ENTER BUTTON
-========================================= */
-
-.hero-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 34px;
-  pointer-events: auto;
+.hero-trail {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 5;
+  stroke-linecap: round;
+  opacity: 0.9;
 }
 
-.hero-cta .px-btn {
-  padding: 12px 28px;
-  font-family: 'Bitcount Grid Double', monospace;
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  color: #cfe3ff;
-  background: rgba(6, 10, 22, 0.8);
-  border: 1px solid var(--cyan, #3ff2ff);
-  cursor: pointer;
-  transition:
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    color 0.25s ease;
+.hero-trail.orbit {
+  stroke-width: 3;
+  stroke-dasharray: 2 0;
 }
 
-.hero-cta .px-btn:hover {
-  color: #fff;
-  background: rgba(45, 105, 255, 0.25);
-  box-shadow: 0 0 24px rgba(63, 242, 255, 0.2);
+/* =========================================================
+   LOGO
+========================================================= */
+
+.hero-logo image {
+  filter: drop-shadow(0 0 18px rgba(63, 242, 255, 0.35));
 }
 
-/* =========================================
-   SCROLL HINT
-========================================= */
+.hero-ping {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ping 3.2s ease-out infinite;
+}
+
+.hero-ping.delay {
+  animation-delay: 1.6s;
+}
+
+@keyframes ping {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+
+.hero-orbit-ring {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 3;
+  stroke-dasharray: 4 14;
+  opacity: 0.45;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: orbitSpin 30s linear infinite;
+}
+
+@keyframes orbitSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   SKIP
+========================================================= */
+
+.hero-skip {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 32px;
+  z-index: 75;
+  padding: 8px 14px;
+  font-family: var(--font-tiny);
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  border: 1px solid var(--line);
+  background: rgba(6, 10, 22, 0.6);
+  animation: blink 1.4s steps(2) infinite;
+}
+
+.hero-skip:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+}
+
+/* =========================================================
+   HINT
+========================================================= */
 
 .hero-hint {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 24px;
-  z-index: 3;
-
-  margin: 0;
+  bottom: 22px;
   text-align: center;
-
-  font-family: 'Bitcount Grid Double', monospace;
-  font-size: 11px;
-  letter-spacing: 1px;
-  line-height: 1.8;
-  color: var(--text-dim, #a9b8d0);
+  font-family: var(--font-tiny);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
 }
 
 .hero-hint > span:first-child {
   display: inline-block;
-  margin-left: 8px;
-  color: var(--cyan, #3ff2ff);
-  animation: heroBounce 1.4s ease-in-out infinite;
+  color: var(--cyan);
+  animation: bounce 1.4s ease-in-out infinite;
 }
 
-@keyframes heroBounce {
-  50% {
-    transform: translateY(4px);
-  }
+@keyframes bounce {
+  50% { transform: translateY(4px); }
 }
-
-/* =========================================
-   RESPONSIVE
-========================================= */
 
 @media (max-width: 760px) {
-  .hero {
-    min-height: 520px;
-  }
-
-  .hero-title {
-    font-size: clamp(36px, 10vw, 68px);
-  }
-
-  .hero-eyebrow {
-    font-size: 11px;
-  }
-
-  .hero-subtitle {
-    max-width: 280px;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-  }
-
-  .hero-circular {
-    width: 190px;
-  }
-
   .hero-hint {
-    bottom: 20px;
-    font-size: 9px;
+    bottom: 92px;
+    font-size: 10px;
   }
 
   .hero-hint-keys {
     display: none;
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-circular .outerRing,
-  .hero-circular .innerRing,
-  .hero-hint > span:first-child {
-    animation: none;
-  }
-}
-
-.home-hero-static {
-  display: grid;
-  place-items: center;
-  background: transparent;
-}
-
-.home-hero-static-content {
-  width: 100%;
-  padding: 24px;
-  text-align: center;
-}
-
-.home-hero-static-content h1 {
-  margin: 16px 0;
-  font-family: "Bitcount Grid Double", monospace;
-  font-size: clamp(42px, 8vw, 112px);
-  color: #f6faff;
-  text-shadow: 0 0 30px rgba(70, 140, 255, 0.4);
-}
-
-.home-hero-eyebrow,
-.home-hero-tagline,
-.home-hero-scroll {
-  font-family: "Bitcount Grid Double", monospace;
-  color: #cfe3ff;
-  letter-spacing: 0.15em;
-}
-
-.home-hero-scroll {
-  margin-top: 80px;
-  font-size: 11px;
 }

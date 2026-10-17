@@ -239,6 +239,24 @@ a {
   }
 }
 
+/* =========================================================
+   OLD FILM FLICKER (loader IEEE + hero title)
+========================================================= */
+
+@keyframes oldFilm {
+  0%, 100% { opacity: 1; filter: none; transform: none; }
+  8% { opacity: 0.55; }
+  9% { opacity: 1; }
+  31% { opacity: 0.85; transform: translate(1px, 0); }
+  32% { opacity: 1; transform: none; }
+  57% { opacity: 0.3; filter: brightness(1.8); }
+  58% { opacity: 1; filter: none; }
+  59% { opacity: 0.6; }
+  60% { opacity: 1; }
+  83% { opacity: 0.9; transform: translate(-2px, 1px); }
+  84% { transform: none; }
+}
+
 @keyframes blink {
   50% {
     opacity: 0;

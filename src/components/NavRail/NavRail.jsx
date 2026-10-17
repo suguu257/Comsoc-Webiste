@@ -18,6 +18,7 @@ const horizontalRail = () => window.matchMedia("(max-width: 760px)").matches;
 
 export default function NavRail() {
   const active = ui.use((s) => s.active);
+  const loaded = ui.use((s) => s.loaded);
   const introDone = ui.use((s) => s.introDone);
   const visited = game.use((s) => s.visited);
 
@@ -139,7 +140,7 @@ export default function NavRail() {
   return (
     <nav
       ref={railRef}
-      className={`rail ${introDone ? "is-live" : ""}`}
+      className={`rail ${loaded ? "is-ready" : ""} ${introDone ? "is-live" : ""}`}
       aria-label="Sections"
     >
       <div className="rail-line">
