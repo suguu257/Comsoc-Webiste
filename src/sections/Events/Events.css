@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap');
+
 .events {
   padding-left: 0;
   padding-right: 0;
@@ -28,7 +31,11 @@
   left: 0;
   right: 0;
   height: 34px;
-  background-image: radial-gradient(ellipse 9px 8px at center, var(--hole) 0 98%, transparent 100%);
+  background-image: radial-gradient(
+    ellipse 9px 8px at center,
+    var(--hole) 0 98%,
+    transparent 100%
+  );
   background-size: 30px 34px;
   background-repeat: repeat-x;
   z-index: 3;
@@ -50,7 +57,7 @@
 }
 
 /* =========================================================
-   FRAME
+   FILM FRAME
 ========================================================= */
 
 .film-frame {
@@ -73,7 +80,10 @@
   inset: 0;
   display: block;
   overflow: hidden;
-  transition: transform 0.55s var(--ease-out), box-shadow 0.45s, outline-color 0.3s;
+  transition:
+    transform 0.55s var(--ease-out),
+    box-shadow 0.45s,
+    outline-color 0.3s;
   outline: 3px solid transparent;
 }
 
@@ -81,7 +91,10 @@
 .film-frame:focus-visible .frame-card {
   transform: scale(1.12);
   outline-color: var(--cyan);
-  box-shadow: 0 0 14px rgba(63, 242, 255, 0.55), 0 0 40px rgba(63, 242, 255, 0.35), 0 0 80px rgba(63, 242, 255, 0.2);
+  box-shadow:
+    0 0 14px rgba(63, 242, 255, 0.55),
+    0 0 40px rgba(63, 242, 255, 0.35),
+    0 0 80px rgba(63, 242, 255, 0.2);
 }
 
 .poster-art,
@@ -100,21 +113,27 @@
   filter: brightness(0.45) saturate(1.2);
 }
 
+/* Live badge */
+
 .frame-live {
   position: absolute;
   top: 10px;
   right: 10px;
   padding: 3px 8px;
-  font-family: var(--font-tiny);
+  font-family: 'Bitcount Grid Double', monospace;
   font-size: 11px;
-  letter-spacing: 2px;
+  font-weight: 500;
+  letter-spacing: 1px;
   color: #fff;
   background: #ff2e63;
   box-shadow: 0 0 14px rgba(255, 46, 99, 0.7);
   animation: blink 1.1s steps(2) infinite;
 }
 
-/* Details slide up on hover */
+/* =========================================================
+   FRAME DETAILS
+========================================================= */
+
 .frame-info {
   position: absolute;
   inset: auto 0 0;
@@ -124,10 +143,16 @@
   padding: 16px 14px;
   text-align: left;
   padding-top: 70px;
-  background: linear-gradient(to top, rgba(2, 3, 6, 0.97) 55%, rgba(2, 3, 6, 0));
+  background: linear-gradient(
+    to top,
+    rgba(2, 3, 6, 0.97) 55%,
+    rgba(2, 3, 6, 0)
+  );
   transform: translateY(40%);
   opacity: 0;
-  transition: transform 0.45s var(--ease-out), opacity 0.35s;
+  transition:
+    transform 0.45s var(--ease-out),
+    opacity 0.35s;
 }
 
 .film-frame:hover .frame-info,
@@ -136,32 +161,47 @@
   opacity: 1;
 }
 
+/* Event title */
+
 .frame-title {
-  font-family: var(--font-pixel);
-  font-weight: 700;
-  font-size: 20px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-weight: 600;
+  font-size: clamp(16px, 1.5vw, 20px);
+  letter-spacing: 0;
+  line-height: 1.25;
   color: var(--cyan);
   text-shadow: 0 0 10px var(--cyan-soft);
+  overflow-wrap: anywhere;
 }
 
+/* Event metadata */
+
 .frame-meta {
-  font-family: var(--font-tiny);
-  font-size: 11px;
-  letter-spacing: 1.5px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 1.6;
   color: var(--text-dim);
 }
 
+/* Event summary remains readable */
+
 .frame-summary {
   font-size: 13px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: #d9e2f2;
 }
 
+/* Event call to action */
+
 .frame-cta {
   margin-top: 4px;
-  font-family: var(--font-tiny);
-  font-size: 12px;
-  letter-spacing: 2px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  line-height: 1.5;
   color: var(--gold);
 }
 
@@ -183,14 +223,19 @@
 }
 
 .events-hint {
-  font-family: var(--font-tiny);
-  font-size: 12px;
-  letter-spacing: 3px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 1.8;
   color: var(--text-dim);
   text-align: center;
 }
 
-/* Projector light cone over the title */
+/* =========================================================
+   PROJECTOR BEAM
+========================================================= */
+
 .projector-beam {
   position: absolute;
   left: 50%;
@@ -199,7 +244,14 @@
   height: 120%;
   margin-left: calc(min(900px, 90vw) / -2);
   transform-origin: top center;
-  background: conic-gradient(from 180deg at 50% 0%, transparent 155deg, rgba(160, 200, 255, 0.12) 172deg, rgba(200, 230, 255, 0.2) 180deg, rgba(160, 200, 255, 0.12) 188deg, transparent 205deg);
+  background: conic-gradient(
+    from 180deg at 50% 0%,
+    transparent 155deg,
+    rgba(160, 200, 255, 0.12) 172deg,
+    rgba(200, 230, 255, 0.2) 180deg,
+    rgba(160, 200, 255, 0.12) 188deg,
+    transparent 205deg
+  );
   filter: blur(6px);
   pointer-events: none;
   animation: projectorFlicker 0.18s steps(2) infinite;
@@ -211,7 +263,10 @@
   }
 }
 
-/* Animated grain over the whole reel */
+/* =========================================================
+   FILM GRAIN
+========================================================= */
+
 .film-grain {
   position: absolute;
   inset: -50%;
@@ -223,10 +278,22 @@
 }
 
 @keyframes grain {
-  25% { transform: translate(-3%, 2%); }
-  50% { transform: translate(2%, -3%); }
-  75% { transform: translate(-1%, 3%); }
+  25% {
+    transform: translate(-3%, 2%);
+  }
+
+  50% {
+    transform: translate(2%, -3%);
+  }
+
+  75% {
+    transform: translate(-1%, 3%);
+  }
 }
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media (max-width: 760px) {
   .film-strip {
@@ -241,5 +308,18 @@
 
   .film-frame {
     margin-right: 28px;
+  }
+
+  .frame-title {
+    font-size: 16px;
+  }
+
+  .frame-meta {
+    font-size: 10px;
+  }
+
+  .events-hint {
+    font-size: 10px;
+    letter-spacing: 0.5px;
   }
 }

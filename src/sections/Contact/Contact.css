@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap');
+
 .contact {
   min-height: 100vh;
   overflow: hidden;
@@ -35,6 +38,10 @@
   }
 }
 
+/* =========================================================
+   CONTACT GRID
+========================================================= */
+
 .contact-grid {
   position: relative;
   z-index: 2;
@@ -53,8 +60,9 @@
   border: 1px solid var(--line);
   background: var(--panel);
   backdrop-filter: blur(6px);
-  font-family: var(--font-tiny);
-  letter-spacing: 2px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-weight: 400;
+  letter-spacing: 1px;
 }
 
 .console-head {
@@ -87,14 +95,18 @@
 }
 
 .console-label {
+  font-family: 'Bitcount Grid Double', monospace;
   font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
   color: var(--text-dim);
 }
 
 .console-email {
-  font-family: var(--font-pixel);
-  font-size: clamp(14px, 1.3vw, 18px);
-  letter-spacing: 0.5px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: clamp(13px, 1.15vw, 17px);
+  font-weight: 500;
+  letter-spacing: 0;
   color: var(--text);
   overflow-wrap: anywhere;
   transition: color 0.2s, text-shadow 0.2s;
@@ -106,9 +118,10 @@
 }
 
 .console-copy {
-  font-family: var(--font-tiny);
-  font-size: 12px;
-  letter-spacing: 2px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 1px;
   color: var(--gold);
 }
 
@@ -118,7 +131,10 @@
 
 .console-prompt {
   padding: 16px 18px;
-  font-size: 13px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
   color: var(--cyan);
 }
 
@@ -134,12 +150,15 @@
   width: 10px;
   height: 10px;
   background: var(--cyan);
-  box-shadow: 0 0 14px var(--cyan), -10px 0 0 rgba(63, 242, 255, 0.4), -20px 0 0 rgba(63, 242, 255, 0.15);
+  box-shadow:
+    0 0 14px var(--cyan),
+    -10px 0 0 rgba(63, 242, 255, 0.4),
+    -20px 0 0 rgba(63, 242, 255, 0.15);
   pointer-events: none;
 }
 
 /* =========================================================
-   ORBIT SYSTEM (socials)
+   ORBIT SYSTEM — SOCIALS
 ========================================================= */
 
 .orbit-system {
@@ -190,7 +209,7 @@
   pointer-events: auto;
 }
 
-/* Counter-rotate so icons stay upright */
+/* Social icons retain their existing styling */
 .sat-icon {
   position: relative;
   width: 52px;
@@ -225,9 +244,10 @@
   top: calc(100% + 8px);
   left: 50%;
   translate: -50% 0;
-  font-family: var(--font-tiny);
+  font-family: 'Bitcount Grid Double', monospace;
   font-size: 11px;
-  letter-spacing: 2px;
+  font-weight: 400;
+  letter-spacing: 1px;
   color: var(--cyan);
   white-space: nowrap;
   opacity: 0;
@@ -283,17 +303,19 @@
 }
 
 .report-title {
-  font-family: var(--font-pixel);
-  font-weight: 700;
-  font-size: clamp(28px, 3.4vw, 44px);
+  font-family: 'Bitcount Grid Double', monospace;
+  font-weight: 600;
+  font-size: clamp(25px, 3vw, 40px);
+  letter-spacing: 1px;
   color: var(--gold);
   text-shadow: 0 0 18px rgba(255, 209, 102, 0.45);
 }
 
 .report-rank {
-  font-family: var(--font-tiny);
-  font-size: 13px;
-  letter-spacing: 3px;
+  font-family: 'Bitcount Grid Double', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
   color: var(--text-dim);
 }
 
@@ -310,15 +332,19 @@
 }
 
 .report-grid dt {
-  font-family: var(--font-tiny);
+  font-family: 'Bitcount Grid Double', monospace;
   font-size: 11px;
-  letter-spacing: 2px;
+  font-weight: 400;
+  letter-spacing: 1px;
   color: var(--text-dim);
 }
 
 .report-grid dd {
-  font-family: var(--font-pixel);
-  font-size: clamp(22px, 2.4vw, 32px);
+  font-family: 'Bitcount Grid Double', monospace;
+  font-weight: 500;
+  font-size: clamp(19px, 2vw, 28px);
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
 }
 
 .report-actions {
@@ -338,6 +364,10 @@
   color: var(--text-dim);
 }
 
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
 @media (max-width: 900px) {
   .contact-grid {
     grid-template-columns: 1fr;
@@ -346,18 +376,42 @@
   .report-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .console-row {
+    grid-template-columns: 100px minmax(0, 1fr) auto;
+    gap: 10px;
+  }
 }
 
 @media (max-width: 560px) {
   .console-row {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 14px;
   }
 
   .console-label {
     grid-column: 1 / -1;
   }
 
+  .console-email {
+    font-size: 13px;
+  }
+
+  .console-copy {
+    font-size: 10px;
+  }
+
   .contact {
     padding-bottom: 110px;
   }
+
+  .report-grid {
+    gap: 10px;
+  }
+
+  .report-grid div {
+    padding: 10px;
+  }
 }
+
