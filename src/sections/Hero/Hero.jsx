@@ -1,35 +1,15 @@
-import "./Hero.css";
 
-import Hyperspeed from "../../components/Hyperspeed/Hyperspeed";
-import CircularText from "../../components/Hero/CircularText";
+import "./Hero.css";
 
 export default function Hero() {
   return (
-    <section id="home" className="hero">
-      <div className="hero-hyperspeed">
-        <Hyperspeed />
+    <section id="home" className="hero home-hero-static">
+      <div className="home-hero-static-content">
+        <p className="home-hero-eyebrow">IEEE VIT VELLORE</p>
+        <h1>IEEE COMSOC</h1>
+        <p className="home-hero-tagline">CONNECTING THE FUTURE</p>
+        <p className="home-hero-scroll">SCROLL TO EXPLORE ↓</p>
       </div>
-
-      <div className="hero-content">
-        <p className="hero-eyebrow">IEEE VIT VELLORE</p>
-
-        <h1 className="hero-title">IEEE COMSOC</h1>
-
-        <p className="hero-subtitle">
-          CONNECTING THE FUTURE
-        </p>
-
-        <div className="hero-circular">
-          <CircularText
-            text="IEEE COMSOC • VIT VELLORE • "
-            radius={95}
-          />
-        </div>
-      </div>
-
-      <p className="hero-hint">
-        SCROLL TO EXPLORE <span>▼</span>
-      </p>
     </section>
   );
 }
