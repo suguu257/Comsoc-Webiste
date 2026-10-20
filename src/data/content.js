@@ -101,16 +101,16 @@ const member = (id, role, hotspot, extra = {}) => ({
 
 /* Hotspots match the silhouettes in board-placeholder.svg */
 export const BOARD = [
-  member("chair", "CHAIRPERSON", { x: 34.625, y: 13.4,  w: 10.625, h: 40 }, {name: "Keshav S Kaushish", class: "COMMANDER", stats: { LEAD: 98, COMMS: 90, TECH: 80 } }),
-  member("vice-chair", "VICE CHAIRPERSON", { x: 17.625, y: 24.4,  w: 10.625, h: 40 }, {name: "Srijan Devipur", class: "NAVIGATOR", stats: { LEAD: 92, COMMS: 88, TECH: 78 } }),
-  member("secretary", "SECRETARY", { x: 51.625, y: 15.4,  w: 10.625, h: 40 }, {name: "Ayushman Poddar", class: "ARCHIVIST", stats: { LEAD: 85, COMMS: 94, TECH: 70 } }),
-  member("co-secretary", "CO-SECRETARY", { x: 69.125, y: 23.4,  w: 10.625, h: 40 }, {name: "Hardhik Basotia", class: "ARCHIVIST", stats: { LEAD: 80, COMMS: 90, TECH: 72 } }),
-  member("tech-head", "TECHNICAL HEAD", { x: 4.225, y: 34.4,  w: 10.625, h: 40 }, {name: "Nainika Pathak", class: "ENGINEER", stats: { LEAD: 82, COMMS: 70, TECH: 99 } }),
-  member("events-head", "EVENTS HEAD", { x: 78.525, y: 15, w: 10.625, h: 40 }, {name: "Aadyasha Behera", class: "STRATEGIST", stats: { LEAD: 90, COMMS: 86, TECH: 68 } }),
-  member("design-head", "DESIGN HEAD", { x: 59.56, y: 34.2, w: 10.625, h: 40 }, {name: "Vibhor Gupta", class: "ARTIFICER", stats: { LEAD: 78, COMMS: 80, TECH: 85 } }),
-  member("publicity-head", "PUBLICITY HEAD", { x: 44.69, y: 30.2, w: 10.625, h: 40 }, {name: "Madhur Mishra", class: "BROADCASTER", stats: { LEAD: 80, COMMS: 99, TECH: 65 } }),
-  member("finance-head", "FINANCE HEAD", { x: 85.81, y: 31.2, w: 10.625, h: 40 }, {name: "Anan Jindal", class: "QUARTERMASTER", stats: { LEAD: 84, COMMS: 76, TECH: 74 } }),
-  member("mgmt-head", "MANAGEMENT HEAD", { x: 28.54, y: 31.2, w: 10.625, h: 40 }, {name: "Aniruddh Agarwal", class: "OPERATOR", stats: { LEAD: 90, COMMS: 84, TECH: 70 } }),
+  member("chair", "CHAIRPERSON", { x: 34.625, y: 13.4,  w: 10.625, h: 40 }, {name: "Keshav S Kaushish", class: "COMMANDER", stats: { LEAD: 98, COMMS: 90, TECH: 80 }, bio:"Probably troubleshooting a Wi-Fi router in his sleep. Will willingly trade his lunch for a stable satellite uplink and absolute mission control." }),
+  member("vice-chair", "VICE CHAIRPERSON", { x: 17.625, y: 24.4,  w: 10.625, h: 40 }, {name: "Srijan Devipur", class: "NAVIGATOR", stats: { LEAD: 92, COMMS: 88, TECH: 78 }, bio:"Has never asked for directions in his life, yet somehow always steers the ship right into legendary status. Powered entirely by midnight caffeine and optimism." }),
+  member("secretary", "SECRETARY", { x: 51.625, y: 15.4,  w: 10.625, h: 40 }, {name: "Ayushman Poddar", class: "ARCHIVIST", stats: { LEAD: 85, COMMS: 94, TECH: 70 }, bio:"Keeper of all ancient scrolls and meeting notes. If it wasn't documented in his neatly color-coded database, legally, it never happened in space." }),
+  member("co-secretary", "CO-SECRETARY", { x: 69.125, y: 23.4,  w: 10.625, h: 40 }, {name: "Hardhik Basotia", class: "ARCHIVIST", stats: { LEAD: 80, COMMS: 90, TECH: 72 }, bio:"Co-captain of paperwork and scheduling sorcery. Can draft a master timeline faster than you can say 'deadline extension'." }),
+  member("tech-head", "TECHNICAL HEAD", { x: 4.225, y: 34.4,  w: 10.625, h: 40 }, {name: "Nainika Pathak", class: "ENGINEER", stats: { LEAD: 82, COMMS: 70, TECH: 99 }, bio:"Speaks fluently in binary and sarcastic remarks. If something is broken, she's already fixed it before you even finished explaining the bug."}),
+  member("events-head", "EVENTS HEAD", { x: 78.525, y: 15, w: 10.625, h: 40 }, {name: "Aadyasha Behera", class: "STRATEGIST", stats: { LEAD: 90, COMMS: 86, TECH: 68 }, bio:"Mastermind of chaos and crowds. Can orchestrate a massive interstellar event while calmly sipping cold coffee and checking her watch."}),
+  member("design-head", "DESIGN HEAD", { x: 59.56, y: 34.2, w: 10.625, h: 40 }, {name: "Vibhor Gupta", class: "ARTIFICER", stats: { LEAD: 78, COMMS: 80, TECH: 85 }, bio:"Sees the universe entirely in hex codes and pixel perfection. Will violently judge your choice of fonts if you use Comic Sans near his workstation."}),
+  member("publicity-head", "PUBLICITY HEAD", { x: 44.69, y: 30.2, w: 10.625, h: 40 }, {name: "Madhur Mishra", class: "BROADCASTER", stats: { LEAD: 80, COMMS: 99, TECH: 65}, bio:"Can transmit a signal across the entire galaxy before your morning alarm goes off. If it's not trending across the cosmos, did it even happen?" }),
+  member("finance-head", "FINANCE HEAD", { x: 85.81, y: 31.2, w: 10.625, h: 40 }, {name: "Anan Jindal", class: "QUARTERMASTER", stats: { LEAD: 84, COMMS: 76, TECH: 74 }, bio:"Defends the mission budget like a dragon guarding gold. Will audit your receipt for a single space-pen down to the last decimal place."}),
+  member("mgmt-head", "MANAGEMENT HEAD", { x: 28.54, y: 31.2, w: 10.625, h: 40 }, {name: "Aniruddh Agarwal", class: "OPERATOR", stats: { LEAD: 90, COMMS: 84, TECH: 70 }, bio:"Herding cats? Easy. Managing a chaotic crew of tech enthusiasts? His daily routine. Keeps the entire mothership running smoothly without breaking a sweat."}),
 ];
 
 /* =========================================================
